@@ -14,6 +14,9 @@ class Brand(models.Model):
         return self.name
 
 class UserProfile(models.Model):
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User)
     country = CountryField(blank=True, null=True)
     brand = models.ForeignKey(Brand)
+
+    def __str__(self):
+        return self.user + "'s profile'"
