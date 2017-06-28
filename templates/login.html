@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+Login
+{% endblock title %}
+
+{% block content %}
+    <!-- right sidebar wrapper -->
+    <div class="inner-wrap">
+        <div class="wrap-fluid">
+            <br>
+            <br>
+            <!-- Container Begin -->
+            <div class="large-5 small-centered columns">
+                <div class="profile"> <img alt="" class="" src="{% static "img/yeti.svg" %}">
+                    <h3>SmileyLab </h3> </div>
+                <div class="box bg-white">
+                    <!-- Profile -->
+                    <!-- End of Profile -->
+                    <!-- /.box-header -->
+                    <div class="box-body " style="display: block;">
+                        <div class="row">
+                            <div class="large-12 columns">
+                                <div class="row">
+                                    <div class="edumix-signup-panel">
+                                      {% if message %}
+                                      <p style="color:red;">{{message}}</p>
+                                      {% endif %}
+                                        <p class="welcome">Log in with you email account</p>
+                                        <form name="login" method="post" action="{% url "app:index" %}">
+                                          {% csrf_token %}
+                                            <div class="row column log-in-form">
+                                                <label>Username
+                                                    <input type="text" name="username" placeholder="somebody@example.com"> </label>
+                                                <label>Password
+                                                    <input type="text" name="" placeholder="Password"> </label>
+                                                <p><input type="submit" value="Login" class="button expanded" /></p>
+                                                <p class="text-center"><a href="#">Forgot your password?</a></p>
+                                            </div>
+                                        </form>
+                                        <br>
+                                        <h2><span>OR</span></h2>
+                                        <p class="welcome text-center">Sign in with</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="large-5 columns no-pad">
+                                        <div class="edumix-footer-panel"> <a href="#"><span class="bg-aqua"><i class="fa fa-twitter"></i>&nbsp;&nbsp;sign in with twitter</span></a> </div>
+                                    </div>
+                                    <div class="large-2 columns"></div>
+                                    <div class="large-5 columns no-pad">
+                                        <div class="edumix-footer-panel"> <a href="#"><span class="bg-dark-blue"><i class="fa fa-facebook"></i>&nbsp;&nbsp;sign in with facebook</span></a> </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end .timeline -->
+                </div>
+                <!-- box -->
+            </div>
+        </div>
+        <!-- End of Container Begin -->
+    </div>
+    <!-- end paper bg -->
+    <div id="gradient" />
+
+{% endblock content %}
