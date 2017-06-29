@@ -28,6 +28,13 @@ class FileRepository(models.Model):
     fileCategory = models.ForeignKey(FileCategory)
     file_name = models.CharField(max_length=150)
 
+class Member(models.Model):
+    date_added = models.DateTimeField(default=timezone.now)
+    name = models.CharField(max_length=150)
+    memberType = models.ForeignKey(MemberType)
+    def __str__(self):
+        return self.name
+
 class MemberProperty(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     value = models.CharField(max_length=150)
@@ -37,13 +44,6 @@ class MemberProperty(models.Model):
     property_name = models.CharField(max_length=150)
     table_name = models.CharField(max_length=150)
     memberType = models.ForeignKey(MemberType)
-
-class Member(models.Model):
-    date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150)
-    memberType = models.ForeignKey(MemberType)
-    def __str__(self):
-        return self.name
 
 class Evaluation(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
@@ -82,7 +82,7 @@ class PatchTolerance(models.Model):
     dE2000_level2 = models.FloatField()
     dE2000_level3 = models.FloatField()
     density = models.FloatField()
-    desc = models.CharField(max_lenght=150)
+    desc = models.CharField(max_length=150)
     dot_gain = models.FloatField()
     g7 = models.FloatField()
     lab_a = models.FloatField()
@@ -93,7 +93,7 @@ class PatchTolerance(models.Model):
     metamerism_level1 = models.FloatField()
     metamerism_level2 = models.FloatField()
     metamerism_level3 = models.FloatField()
-    name = models.CharField(max_lenght=150)
+    name = models.CharField(max_length=150)
     print_contrast = models.FloatField()
     spectral_1 = models.FloatField()
     spectral_10 = models.FloatField()
@@ -132,7 +132,7 @@ class PatchTolerance(models.Model):
     spectral_8 = models.FloatField()
     spectral_9 = models.FloatField()
     trap = models.FloatField()
-    version = models.CharField(max_lenght=150)
+    version = models.CharField(max_length=150)
 
 class Standard(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
@@ -184,7 +184,7 @@ class PatchStandard(models.Model):
     dot_gain = models.FloatField()
     g7 = models.FloatField()
     geometry = models.CharField(max_length=150)
-    illuminant models.CharField(max_length=150)
+    illuminant =  models.CharField(max_length=150)
     lab_a = models.FloatField()
     lab_b = models.FloatField()
     lab_c = models.FloatField()
