@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock title %} | Smiley Color and Associates</title>
     <link rel="stylesheet" href="{% static "css/foundation.css" %}" />
-    <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static "css/palette.css" %}">
     <link rel="stylesheet" href="{% static "sass/css/dashboard.css" %}">
     <link rel="stylesheet" href="{% static "css/style.css" %}">
@@ -17,11 +16,12 @@
     <link rel="stylesheet" href="{% static "css/Montserrat-Hairline.css" %}" />
     <link rel="stylesheet" href="{% static "sass/css/theme.css" %}">
     <link rel="stylesheet" href="{% static "css/login.css" %}">
-    <!-- pace loader -->
+
     <script src="{% static "js/pace/pace.js" %}"></script>
     <link href="{% static "js/pace/themes/orange/pace-theme-flash.css" %}" rel="stylesheet" />
     <link rel="stylesheet" href="{% static "js/slicknav/slicknav.css" %}" />
     <script src="{% static "js/vendor/modernizr.js" %}"></script>
+
 </head>
 
 <body>
@@ -29,26 +29,187 @@
   {% block content %}
   {% endblock content %}
 
-
-  <!-- end of inner-wrap -->
-  <!-- main javascript library -->
   <script type='text/javascript' src="{% static "js/jquery.js" %}"></script>
   <script type="text/javascript" src="{% static "js/waypoints.min.js" %}"></script>
   <script type='text/javascript' src="{% static "js/preloader-script.js" %}"></script>
-  <!-- foundation javascript -->
+  <script type='text/javascript' src="{% static "js/what-input.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/foundation.js" %}"></script>
   <script type='text/javascript' src="{% static "js/foundation.min.js" %}"></script>
-  <script type='text/javascript' src="{% static "js/foundation/foundation.dropdown.js" %}"></script>
-  <!-- main edumix javascript -->
+  {# <script type='text/javascript' src="{% static "js/foundation/foundation.dropdown.js" %}"></script> #}
   <script type='text/javascript' src="{% static "js/slimscroll/jquery.slimscroll.js" %}"></script>
   <script type='text/javascript' src="{% static "js/slicknav/jquery.slicknav.js" %}"></script>
   <script type='text/javascript' src="{% static "js/sliding-menu.js" %}"></script>
   <script type='text/javascript' src="{% static "js/scriptbreaker-multiple-accordion-1.js" %}"></script>
-  <script type="text/javascript" src="{% static "js/number/jquery.counterup.min.js" %}"></script>
   <script type="text/javascript" src="{% static "js/circle-progress/jquery.circliful.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/number-progress-bar/jquery.velocity.min.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/number-progress-bar/number-pb.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/loader/loader.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/loader/demo.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/flot/jquery.flot.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/flot/jquery.flot.resize.min.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/flot/jquery.flot.pie.min.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/flot/jquery.flot.categories.min.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/skycons/skycons.js" %}"></script>
   <script type='text/javascript' src="{% static "js/app.js" %}"></script>
-  <!-- additional javascript -->
+  <script type="text/javascript" src="{% static "js/number/jquery.counterup.min.js" %}"></script>
+  <script type='text/javascript' src="{% static "js/gmap/gmap3.js" %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHt7vrI9b3Ze5nGXaCPrlaBzR-Saqg4G8"></script>
+
   <script>
       $(document).foundation();
+  </script>
+
+  <script type="text/javascript">
+    $(function () {
+      "use strict";
+      $('#test').gmap3({
+        center: [-7.39043726, 109.35286072]
+        , zoom: 15
+        , styles: [] //styles
+      }).marker([
+        {
+          position: [-7.39043726, 109.35286072]
+        }
+        , {
+          address: "Yogyakarta, Indonesia"
+        }
+        , {
+          address: "Yogyakarta, Indonesia"
+          , icon: "http://maps.google.com/mapfiles/marker_grey.png"
+        }
+      ]).on('click', function (marker) {
+        marker.setIcon('../../maps.google.com/mapfiles/marker_green.png');
+      });
+      //weather icons
+      var icons = new Skycons({
+        "stroke": 0.06
+        , "color": "Gray"
+        , "cloudColor": "#666666"
+        , "sunColor": "#92cd18"
+        , "moonColor": "DodgerBlue"
+        , "rainColor": "RoyalBlue"
+        , "snowColor": "LightGray"
+        , "windColor": "LightSteelBlue"
+        , "fogColor": "#65C3DF"
+      })
+      , list = [
+        "clear-day", "clear-night", "partly-cloudy-day"
+        , "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind"
+        , "fog"
+      ]
+      , i;
+      for (i = list.length; i--;) icons.set(list[i], list[i]);
+      icons.play()
+      /*
+      * LINE CHART
+      * ----------
+      */
+      //LINE randomly generated data
+      var line_data1 = [
+        [1, 800]
+        , [2, 1500]
+        , [3, 900]
+        , [4, 1900]
+        , [5, 4000]
+        , [6, 2800]
+        , [7, 2500]
+        , [8, 700]
+        , [9, 1500]
+        , [10, 1000]
+        , [11, 2000]
+        , [12, 4300]
+        , [13, 1756]
+        , [14, 2000]
+        , [15, 1500]
+        , [16, 1900]
+        , [17, 1200]
+        , [18, 2800]
+        , [19, 3200]
+        , [20, 2190]
+      ];
+      var line_data2 = [
+        [1, 1800]
+        , [2, 2900]
+        , [3, 1950]
+        , [4, 3450]
+        , [5, 7000]
+        , [6, 5300]
+        , [7, 4890]
+        , [8, 2300]
+        , [9, 3900]
+        , [10, 2900]
+        , [11, 4500]
+        , [12, 2200]
+        , [13, 1120]
+        , [14, 1459]
+        , [15, 1100]
+        , [16, 1189]
+        , [17, 300]
+        , [18, 1250]
+        , [19, 1705]
+        , [20, 959]
+
+      ];
+      $.plot("#line-chart", [line_data1, line_data2], {
+        grid: {
+          hoverable: true
+          , borderColor: "#E2E6EE"
+          , borderWidth: 0
+          , labelMargin: 20
+          , Margin: 1
+          , aboveData: false
+          , tickColor: "#E2E6EE"
+        }
+        ,
+        series: {
+          shadowSize: 0
+          , bars: {
+            show: true
+            , lineWidth: 0
+            , barWidth: 0.9
+            , fill: 0.7
+            , zero: true
+          }
+          , points: {
+            show: false
+          }
+        }
+        ,
+        colors: ["#f20556", "#1565C0"]
+        ,
+        yaxis: {
+          show: false
+          ,
+        }
+        , xaxis: {
+            show: true
+            , position: "top"
+        }
+      });
+        //Initialize tooltip on hover
+        $("<div class='tooltip-inner' id='line-chart-tooltip'></div>").css({
+          position: "absolute"
+          , background: "#333333"
+          , padding: "3px 10px"
+          , color: "#ffffff"
+          , display: "none"
+          , opacity: 1
+        }).appendTo("body");
+        $("#line-chart").bind("plothover", function (event, pos, item) {
+          if (item) {
+            var x = item.datapoint[0].toFixed(2)
+            , y = item.datapoint[1].toFixed(2);
+            $("#line-chart-tooltip").html(item.series.label + " of " + x + " = " + y).css({
+              top: item.pageY + 5
+              , left: item.pageX + 5
+            }).fadeIn(200);
+          }
+          else {
+            $("#line-chart-tooltip").hide();
+          }
+        });
+
+      });
   </script>
 </body>
 </html>
