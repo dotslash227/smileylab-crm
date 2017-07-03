@@ -28,13 +28,13 @@ Login
                                       <p style="color:red;">{{message}}</p>
                                       {% endif %}
                                         <p class="welcome">Log in with you email account</p>
-                                        <form name="login" method="post" action="{% url "app:index" %}">
+                                        <form  method="post" action="{% url "app:index" %}">
                                           {% csrf_token %}
                                             <div class="row column log-in-form">
                                                 <label>Username
-                                                    <input type="text" name="username" placeholder="somebody@example.com"> </label>
+                                                    <input type="text" name="uname" placeholder="somebody@example.com"> </label>
                                                 <label>Password
-                                                    <input type="text" name="" placeholder="Password"> </label>
+                                                    <input type="text" name="pass" placeholder="Password"> </label>
                                                 <p><input type="submit" value="Login" class="button expanded" /></p>
                                                 <p class="text-center"><a href="#">Forgot your password?</a></p>
                                             </div>
