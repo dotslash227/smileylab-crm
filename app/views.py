@@ -5,7 +5,6 @@ from django.shortcuts import render
 from django.contrib.auth import login, logout, authenticate
 
 def index(request):
-    # return render(request, "index.html", {})
     if request.method == "POST":
         username = request.POST.get("uname")
         password = request.POST.get("pass")
@@ -27,3 +26,6 @@ def index(request):
             return render(request, "index.html", {})
         else:
             return render(request, "login.html", {})
+
+def job(request):
+    return render(request, "job.html", {})

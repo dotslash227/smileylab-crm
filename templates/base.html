@@ -25,9 +25,16 @@
 </head>
 
 <body>
+  <div class="wrapper">
 
-  {% block content %}
-  {% endblock content %}
+        {% include "header.html" %}
+
+        {% block content %}
+        {% endblock content %}
+
+        {% include "footer.html" %}
+
+  </div>
 
   <script type='text/javascript' src="{% static "js/jquery.js" %}"></script>
   <script type="text/javascript" src="{% static "js/waypoints.min.js" %}"></script>
