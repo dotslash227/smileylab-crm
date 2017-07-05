@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %} ROLE {% endblock title %} {% block content %}
+<div class="row" style="margin-top:-20px">
+  <div class="large-12 columns">
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="box palette-Yellow-800 bg">
+          <div class="box-header  palette-Yellow-800 bg">
+            <h3 class="box-title"><span class="text-white">&nbsp;&nbsp;&nbsp;NEW ROLE</span></h3>
+            <div class="pull-right text-white box-tools">
+              <span class="text-white box-btn"><i class="circle-nest-medium ti-notepad"></i>
+              </span> &nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="medium-9 columns ">
+              <div>
+                <form class="form-inline">
+                  <br>
+                  <br>
+
+                  <div class="form-group">
+                    <label class="sr-only">Role Name:</label>
+                    <input type="text" class="form-control" name="roleName" required>
+                  </div>
+
+                  <button type="submit" class="btn btn-default">Create Role</button>
+
+                  <br>
+                  <br>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -56,3 +56,11 @@ def patchTolerance(request):
 
                     }
                   )
+def role(request):
+    return render(request, "role.html", {})
+
+def bookmark(request):
+    return render(request, "bookmark.html", {})
+
+def link(request):
+    return render(request, "link.html", {})

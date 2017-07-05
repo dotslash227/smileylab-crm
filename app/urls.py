@@ -8,6 +8,11 @@ urlpatterns = [
     url(r'^standard$', views.standard, name="standard"),
     url(r'^patchStandard$', views.patchStandard, name="patchStandard"),
     url(r'^patchTolerance$', views.patchTolerance, name="patchTolerance"),
+    url(r'^role$', views.role, name="role"),
+    url(r'^bookmark$', views.bookmark, name="bookmark"),
+    url(r'^link$', views.link, name="link"),
+
+
 
 
 ]

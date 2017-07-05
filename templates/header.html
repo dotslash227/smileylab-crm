@@ -88,7 +88,7 @@
                 <li>
                   <a class="tooltip-tip" href="#" title="Extra"> <i class="palette-Pink-700 bg ti-gift"></i> <span>Bookmarks</span> </a>
                   <ul>
-                    <li><a href="#">New Bookmarks</a></li>
+                    <li><a href="{% url "app:bookmark"%}">New Bookmarks</a></li>
                     <li><a href="#">Show Bookmarks</a></li>
                     <li><a href="#">New Bookmarks Category</a></li>
                     <li><a href="#">Show Bookmarks Category</a></li>
@@ -97,7 +97,7 @@
                 <li>
                   <a class="tooltip-tip" href="#" title="Extra"> <i class="palette-Pink-700 bg ti-gift"></i> <span>Links</span> </a>
                   <ul>
-                    <li><a href="#">New Links</a></li>
+                    <li><a href="{% url "app:link"%}">New Links</a></li>
                     <li><a href="#">Show Links</a></li>
                   </ul>
                 </li>
@@ -105,8 +105,8 @@
                   <a class="tooltip-tip" href="#" title="Extra"> <i class="intial palette-Lime-700 bg ti-harddrives"></i> <span>Others</span> </a>
                   <ul>
                     <li><a href="#">Triggers</a></li>
-                    <li><a href="#">New Role</a></li>
-                    <li><a href="#">New Links</a></li>
+                    <li><a href="{% url "app:role"%}">New Role</a></li>
+                    <li><a href="{% url "app:link"%}">New Links</a></li>
                     <li><a href="#">Show Links</a></li>
                   </ul>
                 </li>

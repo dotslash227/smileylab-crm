@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %} Bookmark {% endblock title %} {% block content %}
+<div class="row" style="margin-top:-20px">
+  <div class="large-12 columns">
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="box palette-Yellow-800 bg">
+          <div class="box-header  palette-Yellow-800 bg">
+            <h3 class="box-title"><span class="text-white">&nbsp;&nbsp;&nbsp;NEW Bookmark</span></h3>
+            <div class="pull-right text-white box-tools">
+              <span class="text-white box-btn"><i class="circle-nest-medium ti-notepad"></i>
+              </span> &nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="medium-9 columns ">
+              <div>
+                <form class="form-inline">
+                  <br>
+                  <br>
+
+
+
+                  <div class="form-group">
+                    <label class="sr-only" name="category">Category Name:</label>
+                    <select  class="form-control" required>
+                      <option>1</option>
+                      <option>2</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only">Bookmark Name:</label>
+                    <input type="text" class="form-control" name="bookmarkName" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only">Description:</label>
+                    <input type="text" class="form-control" name="description" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only">Start Date:</label>
+                    <input type="date" class="form-control" name="startDate" value="2000-12-30" placeholder="DOB(dd/mm/yyyy)" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only">End Date:</label>
+                    <input type="date" class="form-control" name="endDate" value="2000-12-30" placeholder="DOB(dd/mm/yyyy)" required>
+                  </div>
+                  <button type="submit" class="btn btn-default">Create Bookmark</button>
+
+                  <br>
+                  <br>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
