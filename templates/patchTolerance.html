@@ -1,0 +1,124 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %} Home {% endblock title %} {% block content %}
+<div class="row" style="margin-top:-20px">
+  <div class="large-12 columns">
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="box palette-Yellow-800 bg">
+          <div class="box-header  palette-Yellow-800 bg">
+            <h3 class="box-title"><span class="text-white">&nbsp;&nbsp;&nbsp;NEW Patch Tolerance</span></h3>
+            <div class="pull-right text-white box-tools">
+              <span class="text-white box-btn"><i class="circle-nest-medium ti-notepad"></i>
+              </span> &nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="medium-9 columns ">
+              <div>
+                <form class="form-inline">
+                  <br>
+                  <br>
+
+
+                  <div class="form-group">
+                    <label class="sr-only">Name:</label>
+                    <input type="text" class="form-control" name="name" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only">Desc:</label>
+                    <input type="text" class="form-control" name="desc" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only">Version:</label>
+                    <input type="text" class="form-control" name="version" required>
+                  </div>
+
+                  {% for i in range36 %}
+
+                  <div class="form-group">
+                    <label class="sr-only">Spectral {{i}}:</label>
+                    <input type="text" class="form-control" name="spectral{{i}}" required>
+                  </div>
+
+                  {% endfor %}
+
+
+                  {% for i in labRange %}
+
+                  <div class="form-group">
+                    <label class="sr-only">Lab {{i}}:</label>
+                    <input type="text" class="form-control" name="lab{{i}}" required>
+                  </div>
+
+                  {% endfor %}
+
+                  <div class="form-group">
+                    <label class="sr-only">Density:</label>
+                    <input type="text" class="form-control" name="density" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only">Dot Gain:</label>
+                    <input type="text" class="form-control" name="dotGain" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only">Print Contrast:</label>
+                    <input type="text" class="form-control" name="printContrast" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only">G7:</label>
+                    <input type="text" class="form-control" name="G7" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="sr-only">Trap:</label>
+                    <input type="text" class="form-control" name="trap" required>
+                  </div>
+
+                
+                  </div>
+
+                  {% for i in metamerismLevelRange %}
+
+                  <div class="form-group">
+                    <label class="sr-only">Metamerism Level {{i}}:</label>
+                    <input type="text" class="form-control" name="metamerismLevel{{i}}" required>
+                  </div>
+
+                  {% endfor %}
+
+                  {% for i in dE2000LevelRange %}
+
+                  <div class="form-group">
+                    <label class="sr-only">D E2000 Level {{i}}:</label>
+                    <input type="text" class="form-control" name="dE2000Level{{i}}" required>
+                  </div>
+
+                  {% endfor %}
+
+
+
+                  <div class="form-group">
+                    <label class="sr-only" name="active">Active:</label>
+                    <select class="form-control" required>
+                          <option>Active</option>
+                          <option>Inactive</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-default">Create Brand Color</button>
+
+                  <br>
+                  <br>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

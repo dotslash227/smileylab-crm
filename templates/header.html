@@ -51,7 +51,7 @@
                 <li>
                   <a class="tooltip-tip" href="#" title="Division"> <i class="intial palette-Blue-700 bg ti-email"></i> <span>Division</span> </a>
                   <ul>
-                    <li><a href="#">New Division</a></li>
+                    <li><a href="{% url "app:division" %}">New Division</a></li>
                     <li><a href="#">Show Divisions</a></li>
                   </ul>
                 </li>
@@ -59,11 +59,11 @@
                   <a href="#" class="tooltip-tip"> <i class="intial palette-Blue-900 bg ti-write"></i> <span>Standard
                     <small class="side-menu-noft bg-blue">hot</small></span> </a>
                   <ul>
-                    <li><a href="#">New Standards</a></li>
+                    <li><a href="{% url "app:standard" %}">New Standards</a></li>
                     <li><a href="#">Show Standards</a></li>
                     <li><a href="#">Show Evaluations</a></li>
-                    <li><a href="#">New Brand Colors</a></li>
-                    <li><a href="#">New Patch Tolerance</a></li>
+                    <li><a href="{% url "app:patchStandard" %}">New Brand Color</a></li>
+                    <li><a href="{% url "app:patchTolerance"%}">New Patch Tolerance</a></li>
                     <li><a href="#">Show Member Evaluation</a></li>
                     <li><a href="#">Show Member Property</a></li>
                   </ul>

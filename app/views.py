@@ -29,3 +29,30 @@ def index(request):
 
 def job(request):
     return render(request, "job.html", {})
+
+def division(request):
+    return render(request, "division.html", {})
+
+def standard(request):
+    return render(request, "standard.html", {})
+
+def patchStandard(request):
+    return render(request, "patchStandard.html",
+                    {
+                      "range36":xrange(1,37),
+                      "labRange":["L", "A", "B", "C", "H"],
+                      "rgbRange": ["R", "G", "B"],
+
+                    }
+                  )
+
+def patchTolerance(request):
+    return render(request, "patchTolerance.html",
+                    {
+                      "range36":xrange(1,37),
+                      "labRange":["L", "A", "B", "C", "H"],
+                      "metamerismLevelRange": xrange(1,4),
+                      "dE2000LevelRange": xrange(1,4),
+
+                    }
+                  )
