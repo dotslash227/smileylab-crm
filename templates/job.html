@@ -12,10 +12,10 @@
             </div>
             <div class="medium-9 columns ">
               <div>
-                <form class="form-inline">
+                <form action="#" method="POST" class="form-inline">{% csrf_token %}
                   <br>
                   <br>
-
+                  <h4 style="color: red">{{message}}</h4>
                   <div class="form-group">
                     <label class="sr-only" name="brand">Brand Name:</label>
                     <select class="form-control" required>
@@ -41,8 +41,8 @@
                   <div class="form-group">
                     <label class="sr-only" name="active">Active:</label>
                     <select class="form-control" required>
-                          <option>Active</option>
-                          <option>Inactive</option>
+                          <option value="True">Active<option>
+                          <option value="False">Inactive<option>
                     </select>
                   </div>
 
@@ -94,8 +94,8 @@
 
                     <label class="sr-only" name="active">Active:</label>
                     <select class="form-control" required>
-                          <option>Active</option>
-                          <option>Inactive</option>
+                          <option value="True">Active<option>
+                          <option value="False">Inactive<option>
                     </select>
                   </div>
 

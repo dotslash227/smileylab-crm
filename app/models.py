@@ -149,9 +149,9 @@ class PatchTolerance(models.Model):
 
 class Standard(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
+    active = models.BooleanField(default=True)
     name = models.CharField(max_length=150, null=True)
     icc = models.CharField(max_length=150, null=True)
-    brand = models.ForeignKey(Brand)
     version = models.CharField(max_length=150, null=True)
     def __str__(self):
         return self.name
@@ -166,7 +166,6 @@ class Product(models.Model):
 class Division(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=150, null=True)
-    brand = models.ForeignKey(Brand)
     address = models.CharField(max_length=150, null=True)
     city = models.CharField(max_length=150, null=True)
     state =  models.CharField(max_length=150, null=True)
@@ -174,8 +173,8 @@ class Division(models.Model):
     member = models.ForeignKey(Member)
     zipCode = models.IntegerField(
                                     validators=[
-                                        MaxValueValidator(000000),
-                                        MinValueValidator(999999)
+                                        MinValueValidator(100000),
+                                        MaxValueValidator(999999)
                                     ],
                                     null=True
                                 )

@@ -12,11 +12,10 @@
             </div>
             <div class="medium-9 columns ">
               <div>
-                <form class="form-inline">
+                <form action="#" method="POST" class="form-inline">{% csrf_token %}
                   <br>
                   <br>
-
-
+                  <h4 style="color: red">{{message}}</h4>
                   <div class="form-group">
                     <label class="sr-only">Name:</label>
                     <input type="text" class="form-control" name="name" required>
@@ -76,7 +75,7 @@
                     <input type="text" class="form-control" name="trap" required>
                   </div>
 
-                
+
                   </div>
 
                   {% for i in metamerismLevelRange %}
@@ -102,8 +101,8 @@
                   <div class="form-group">
                     <label class="sr-only" name="active">Active:</label>
                     <select class="form-control" required>
-                          <option>Active</option>
-                          <option>Inactive</option>
+                          <option value="True">Active<option>
+                          <option value="False">Inactive<option>
                     </select>
                   </div>
 

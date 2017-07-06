@@ -12,10 +12,10 @@
             </div>
             <div class="medium-9 columns ">
               <div>
-                <form class="form-inline">
+                <form action="#" method="POST" class="form-inline">{% csrf_token %}
                   <br>
                   <br>
-
+                  <h4 style="color: red">{{message}}</h4>
                   <div class="form-group">
                     <label class="sr-only" name="brand">Member Name:</label>
                     <select class="form-control" required>

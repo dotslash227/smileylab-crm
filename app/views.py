@@ -3,6 +3,15 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from django.contrib.auth import login, logout, authenticate
+from .models import *
+from django_countries import countries
+
+
+def str_to_bool(s):
+    if s == 'False':
+        return False
+    else:
+        return True
 
 def index(request):
     if request.method == "POST":
@@ -31,10 +40,56 @@ def job(request):
     return render(request, "job.html", {})
 
 def division(request):
-    return render(request, "division.html", {})
+    if request.method == "POST":
+        name = request.POST.get("name")
+        address = request.POST.get("address")
+        city = request.POST.get("city")
+        state = request.POST.get("state")
+        country = request.POST.get("country")
+        zipCode = int(request.POST.get("zip"))
+        member = Member.objects.get(pk=int(request.POST.get("member")))
+        division = Division(
+                        name = name,
+                        address = address,
+                        city = city,
+                        state =  state,
+                        country = country,
+                        member = member,
+                        zipCode = zipCode,
+                    )
+        division.save()
+        return render(request, "division.html", {
+            "message":"New Division saved successfully!!!",
+            "members":Member.objects.all(),
+            "countries":list(countries),
+        })
+    else:
+        return render(request, "division.html", {
+            "message":"",
+            "members":Member.objects.all(),
+            "countries":list(countries),
+        })
 
 def standard(request):
-    return render(request, "standard.html", {})
+    if request.method == "POST":
+        name = request.POST.get("standardName")
+        icc = request.POST.get("icc")
+        version = request.POST.get("version")
+        Active = request.POST.get("active")
+        standard = Standard(
+                        active = str_to_bool(Active),
+                        name = name,
+                        icc = icc,
+                        version = version,
+                    )
+        standard.save()
+        return render(request, "standard.html", {
+            "message":"New Standard saved successfully!!!",
+        })
+    else:
+        return render(request, "standard.html", {
+            "message":"",
+        })
 
 def patchStandard(request):
     return render(request, "patchStandard.html",
@@ -56,6 +111,7 @@ def patchTolerance(request):
 
                     }
                   )
+
 def role(request):
     return render(request, "role.html", {})
 
