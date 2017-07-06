@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth import login, logout, authenticate
 from .models import *
 from django_countries import countries
+from django.http import JsonResponse
 
 
 def str_to_bool(s):
@@ -36,8 +37,55 @@ def index(request):
         else:
             return render(request, "login.html", {})
 
+def divisionFromBrand(request):
+    resp_dict = {}
+    resp_list=[]
+
+    if request.method == "GET":
+        brand = Brand.objects.get(pk=int(request.GET.get("brand")))
+        member=brand.member
+        divisions = Division.objects.filter(member=member)
+        for each in divisions:
+            data = {}
+            data["id"]=each.id
+            data["name"]=each.name
+            resp_list.append(data)
+
+        resp_dict["divisions"]=resp_list
+        return JsonResponse(resp_dict,safe=False)
+    else:
+        return JsonResponse({"error":"error"})
+
 def job(request):
-    return render(request, "job.html", {})
+    if request.method == "POST":
+        brand = Brand.objects.get(pk=int(request.POST.get("brand")))
+        division
+        job
+        active
+
+        # name = request.POST.get("name")
+        # address = request.POST.get("address")
+        # city = request.POST.get("city")
+        # state = request.POST.get("state")
+        # country = request.POST.get("country")
+        # zipCode = int(request.POST.get("zip"))
+        # member = Member.objects.get(pk=int(request.POST.get("member")))
+        # job = Job(
+        #             brand = brand,
+        #             division = division,
+        #             job = brand,
+        #
+        #         )
+        # division.save()
+        return render(request, "job.html", {
+            "message":"New Job saved successfully!!!",
+            "brands":Brand.objects.all(),
+        })
+    else:
+        return render(request, "job.html", {
+            "message":"",
+            "brands":Brand.objects.all(),
+        })
 
 def division(request):
     if request.method == "POST":

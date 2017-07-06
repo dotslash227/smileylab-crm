@@ -12,24 +12,48 @@
             </div>
             <div class="medium-9 columns ">
               <div>
+
+
+                <script>
+                  function report(value) {
+                    if (value=="") return; // please select - possibly you want something else here
+                    else{
+                      $.get("{%url "app:divisionFromBrand" %}", { "brand": value},
+                          function(divisions){
+                               console.log(divisions, divisions["divisions"].length);
+                               $('#mySelect option').remove();
+                               for(var count=0; count < divisions["divisions"].length; count++){
+                                 console.log("values",divisions["divisions"][count]["id"] );
+                                $('#mySelect').append( new Option(divisions["divisions"][count]["name"],divisions["divisions"][count]["id"]) );
+                               }
+                              //  $('#mySelect').append( new Option(text,val) );
+                      }).fail(function(){
+                          console.log("error");
+                      });
+                    }
+                  }
+                </script>
+
                 <form action="#" method="POST" class="form-inline">{% csrf_token %}
                   <br>
                   <br>
                   <h4 style="color: red">{{message}}</h4>
+
                   <div class="form-group">
-                    <label class="sr-only" name="brand">Brand Name:</label>
-                    <select class="form-control" required>
-                          <option>1</option>
+                    <label class="sr-only" >Brand Name:</label>
+                    <select name="brand" class="form-control" onchange="report(this.value)">
+                      {%for each in brands %}
+                        <option value={{each.pk}}>{{each.name}}</option>
+                      {% endfor %}
                     </select>
                   </div>
-
+                  
 
 
                   <div class="form-group">
                     <label class="sr-only" name="brand">Division Name:</label>
-                    <select multiple class="form-control" required>
-                      <option>1</option>
-                      <option>2</option>
+                    <select id="mySelect" multiple class="form-control" required>
+
                     </select>
                   </div>
 
@@ -38,13 +62,6 @@
                     <input type="text" class="form-control" name="jobsName" required>
                   </div>
 
-                  <div class="form-group">
-                    <label class="sr-only" name="active">Active:</label>
-                    <select class="form-control" required>
-                          <option value="True">Active<option>
-                          <option value="False">Inactive<option>
-                    </select>
-                  </div>
 
                   <div class="form-group">
                     <table class="table table-striped">

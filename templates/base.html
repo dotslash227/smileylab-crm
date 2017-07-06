@@ -62,6 +62,14 @@
   <script type='text/javascript' src="{% static "js/gmap/gmap3.js" %}"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHt7vrI9b3Ze5nGXaCPrlaBzR-Saqg4G8"></script>
 
+  {% comment %} This is for loading division names in job.html.{% endcomment %}
+  {% if brands %}
+    <script type="text/javascript">
+      report("1");
+    </script>
+  {% endif %}
+
+
   <script>
       $(document).foundation();
   </script>
@@ -264,6 +272,7 @@
           filterList.init();
       });
   </script>
+
 
 </body>
 </html>

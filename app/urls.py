@@ -11,8 +11,6 @@ urlpatterns = [
     url(r'^role$', views.role, name="role"),
     url(r'^bookmark$', views.bookmark, name="bookmark"),
     url(r'^link$', views.link, name="link"),
-
-
-
-
+    url(r'^divisionFromBrand$', views.divisionFromBrand, name="divisionFromBrand"),
+    
 ]
