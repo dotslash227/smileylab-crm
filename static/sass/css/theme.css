@@ -316,6 +316,7 @@ Master Text Color
 
 .text-white {
   color: #ffffff !important;
+  text-align: center;
  }
 
 .border-green {
@@ -2177,7 +2178,7 @@ Boxes
 
 #paper-bg {
   background: #fff;
-  min-height: 1040px;
+  min-height: 1024px;
   margin: 0 0 -35px;
   padding: 0 15px 85px;
   position: relative;
