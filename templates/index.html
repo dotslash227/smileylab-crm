@@ -1,262 +1,145 @@
-{% extends "base.html" %}
-{% load staticfiles %}
-{% block title %} Home {% endblock title %}
-
-{% block content %}
-        <div class="row" style="margin-top:-20px">
-          <div class="large-6 columns">
-            <div class="box box-no-shadow bg-widget-random">
-              <!-- /.box-header -->
-              <div class="box-header bg-transparent">
-                <h3 class="box-title"><i class="text-white ti-rss-alt"></i>
-                      <span class="text-white ">LASTEST REPORT</span>
-                    </h3> </div>
-              <div style="margin:15px 0 0" class="box-body">
-                <div class="stats-wrap">
-                  <h2><b class="counter-up text-white">65,800,587</b> <span  style="background:#666;" >+<b  class="counter-up">20</b>%</span></h2>
-                  <p class="text-grey">Total students<small>This Year</small> </p>
-                  <h4><b class="counter-up text-white">1,204</b> <span style="background:#888;">+<b class="counter-up">5</b>%</span></h4>
-                  <p>Graduate <small>This week</small> </p>
-                  <h4 class="text-white"><b class="counter-up">2,690</b> <span>+<b class="counter-up">12,5</b></span></h4>
-                  <p>New students<small>This Month</small> </p>
-                </div>
+{% extends "base.html" %} {% load staticfiles %} {% block title %} Home {% endblock title %} {% block content %}
+<div class="row" style="margin-top:-20px">
+  <div class="large-6 columns">
+    <div class="row">
+      <div class="large-6 columns">
+        <div class="box palette-Red-600 bg">
+          <div class="box-body no-pad" style="display: block;">
+            <div class="events-nest ">
+              <div class="wrap-no-pad text-white" >
+                <br>
+                <img alt="" style="margin-left: auto; margin-right: auto; display: block;" src="{% static "img/templates/jobs.png" %}" width="100px" height="100px" >
+                <h4 class="text-white"><b>JOBS/STATUS</b><br></h4>
+                <br>
               </div>
-              <!-- /.box-body -->
             </div>
-            <div class="row">
-              <div class="large-6 columns">
-                <!--New User-->
-                <div class="box palette-Yellow-800 bg">
-                  <div class="box-header  palette-Yellow-800 bg">
-                    <!-- tools box -->
-                    <div class="pull-right text-white box-tools"> <span class="text-white box-btn"><i class="circle-nest-medium ti-user"></i>
-                          </span>&nbsp;&nbsp;&nbsp; </div>
-                    <h3 class="box-title">
-                            <span class="text-white">&nbsp;&nbsp;&nbsp;NEW USER</span>
-                          </h3> </div>
-                  <!-- /.box-header -->
-                  <div class="box-body no-pad" style="display: block;">
-                    <div class="events-nest ">
-                      <div class="wrap-no-pad text-white">
-                        <h1 class="text-white"><b class="counter-up-fast">390</b></h1> <span>Users</span>
-                        <p>65%</p>
-                        <br> </div>
-                    </div>
-                  </div>
-                  <!-- /.box-body -->
-                </div>
-                <!--end of New User-->
+          </div>
+        </div>
+      </div>
+      <div class="large-6 columns">
+        <div class="box palette-Cyan-400 bg">
+          <div class="box-body no-pad" style="display: block;">
+            <div class="events-nest ">
+              <div class="wrap-no-pad text-white" >
+                <br>
+                <img alt="" style="margin-left: auto; margin-right: auto; display: block;" src="{% static "img/templates/nume_ana.png" %}" width="100px" height="100px" >
+                <h4 class="text-white"><b>Numerical Analysis</b></h4>
+                <br>
               </div>
-              <div class="large-6 columns">
-                <!--facebook-->
-                <div class="box palette-Cyan-400 bg">
-                  <div class="box-header  palette-Cyan-400 bg">
-                    <!-- tools box -->
-                    <div class="pull-right text-white box-tools"> <span class="text-white box-btn"><i class="circle-nest-medium ti-stats-up"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-6 columns">
+        <div class="box palette-Deep-Purple-A400 bg">
+          <div class="box-body no-pad" style="display: block;">
+            <div class="events-nest ">
+              <div class="wrap-no-pad text-white" >
+                <br>
+                <img alt="" style="margin-left: auto; margin-right: auto; display: block;" src="{% static "img/templates/vis_ana.png" %}" width="100px" height="100px" >
+                <h4 class="text-white"><b>Visual Analysis</b></h4>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-6 columns">
+        <div class="box palette-Green-A400 bg">
+          <div class="box-body no-pad" style="display: block;">
+            <div class="events-nest ">
+              <div class="wrap-no-pad text-white" >
+                <br>
+                <img alt="" style="margin-left: auto; margin-right: auto; display: block;" src="{% static "img/templates/ana.png" %}" width="100px" height="100px" >
+                <h4 class="text-white"><b>Analytics</b></b></h4>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="large-6 columns">
+        <div class="box palette-Cyan-400 bg">
+          <div class="box-header  palette-Cyan-400 bg">
+            <div class="pull-right text-white box-tools"> <span class="text-white box-btn"><i class="circle-nest-medium ti-stats-up"></i>
                               </span>&nbsp;&nbsp;&nbsp; </div>
-                    <h3 class="box-title">
+            <h3 class="box-title">
                                 <span class="text-white">&nbsp;&nbsp;&nbsp;PAGE VIEWS</span>
                               </h3> </div>
-                  <!-- /.box-header -->
-                  <div class="box-body no-pad" style="display: block;">
-                    <div class="events-nest ">
-                      <div class="wrap-no-pad text-white">
-                        <h1 class="text-white"><b class="counter-up-fast">294</b></h1> <span>Users</span>
-                        <p>65%</p>
-                        <br> </div>
-                    </div>
-                  </div>
-                  <!-- /.box-body -->
-                </div>
-                <!--end of facebook-->
-              </div>
+          <div class="box-body no-pad" style="display: block;">
+            <div class="events-nest ">
+              <div class="wrap-no-pad text-white">
+                <h1 class="text-white"><b class="counter-up-fast">294</b></h1> <span>Users</span>
+                <p>65%</p>
+                <br> </div>
             </div>
-            <div class="box box-no-shadow bg-transparent ">
-              <!-- /.box-header -->
-              <div class="box-header no-pad bg-transparent">
-                <h3 style="margin-bottom:20px;" class="box-title">
-                                <span>ACTIVE STUDENTS</span>
-                              </h3> </div>
-              <div class="box-body no-pad">
-                <div id="line-chart" style="height: 235px;"></div>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <div class="your-account">
-              <div class="row">
-                <div class="medium-3 columns">
-                  <div class="circlestat" data-dimension="90" data-text="55%" data-width="10" data-fontsize="16" data-percent="55" data-fgcolor="#CDDC39" data-border="10" data-bgcolor="#eee" data-fill="#FFF"></div>
-                </div>
-                <div class="medium-9 columns ">
-                  <div>
-                    <h4>Overall stats of sales and distribution</h4>
-                    <h6>You must <strong>complete</strong> this issues.</h6>
-                    <ul>
-                      <li><i class="text-white palette-Orange-700 bg ti-pie-chart"></i> 2.789</li>
-                      <li><i class="text-white palette-Pink-700 bg ti-stats-down"></i>4.365</li>
-                      <li><i class="palette-Cyan-700 bg text-white ti-bar-chart"></i>9.860 </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--End of Account-->
-            <!--MAP ITEM-->
-            <div class="box no-shadow ">
-              <div class="box-header bg-transparent">
-                <!-- tools box -->
-                <div class="pull-right box-tools"> <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
-                                </span> <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
-                                </span> </div>
-                <h3 class="box-title"><i class="ti-location-pin"></i>
-                                  <span>MAPS</span>
-                                </h3> </div>
-              <!-- /.box-header -->
-              <div class="box-body no-pad" style="display: block;padding: 0 10px!important;">
-                <!-- Gmap-->
-                <div id="test" class="gmap3"></div>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- end of MAP ITEM-->
           </div>
-          <!--End of Right Side-->
-          <div class="large-6 columns">
-            <!--facebook-->
-            <div class="box palette-Blue-800 bg">
-              <div class="box-header  palette-Blue-800 bg">
-                <!-- tools box -->
-                <div class="pull-right text-white box-tools"> <span class="box-btn "><i class="circle-nest ti-comment-alt"></i>
-                                  </span> <span class="text-white box-btn"><i class="circle-nest ti-user"></i>
-                                  </span> <span class="text-white box-btn"><i class="circle-nest ti-world"></i>
-                                  </span> </div>
-                <h3 class="box-title"><i class="text-white circle-nest-medium ti-facebook"></i>
-                                    <span class="text-white">FACEBOOK</span>
-                                  </h3> </div>
-              <!-- /.box-header -->
-              <div class="box-body no-pad" style="display: block;">
-                <div class="events-nest ">
-                  <div class="wrap-no-pad text-white">
-                    <h1 class="text-white"><img alt="profile" class="img-circle palette-Grey-900 bg" src="../../api.randomuser.me/portraits/thumb/men/46.jpg"></h1> <span>Alif Mubarok</span>
-                    <p>Monday <i class="fontello-record"></i> Nov 2016
-                      <br>With what mingled joy the pen to write to my dearest friend!</p>
-                  </div>
-                </div>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!--end of facebook-->
-            <!--twitter-->
-            <div class="box palette-Blue-500 bg">
-              <div class="box-header  palette-Blue-500 bg">
-                <!-- tools box -->
-                <div class="pull-right text-white box-tools"> <span class="box-btn "><i class="circle-nest ti-heart"></i>
-                                      </span> <span class="text-white box-btn"><i class="circle-nest ti-email"></i>
-                                      </span> <span class="text-white box-btn"><i class="circle-nest ti-reload"></i>
-                                      </span> </div>
-                <h3 class="box-title"><i class="text-white circle-nest-medium ti-twitter-alt"></i>
-                                        <span class="text-white">TWITTER</span>
-                                      </h3> </div>
-              <!-- /.box-header -->
-              <div class="box-body no-pad" style="display: block;">
-                <div class="events-nest ">
-                  <div class="wrap-no-pad text-white">
-                    <h1 class="text-white"><img alt="profile" class="img-circle palette-Grey-900 bg" src="../../api.randomuser.me/portraits/thumb/men/45.jpg"></h1> <span>Alif Mubarok</span>
-                    <p>Monday <i class="fontello-record"></i> Nov 2016
-                      <br>With what mingled joy the pen to write to my dearest friend!</p>
-                  </div>
-                </div>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!--end of twitter-->
-            <!--SUMMARY-->
-            <div class="box box-no-shadow">
-              <!-- /.box-header -->
-              <div class="box-body " style="display: block;">
-                <div style="margin:0" class="row summary-border-top">
-                  <div class="large-6 columns">
-                    <div class="summary-nest">
-                      <h2 class="text-black "><span class="counter-up">276.747</span><small class="palette-Orange-700 bg">K</small></h2>
-                      <p>Sales</p>
-                    </div>
-                  </div>
-                  <div class="large-6 columns summary-border-left">
-                    <div class="summary-nest">
-                      <h2 class="text-black"><span class="counter-up">3.219</span><small class="palette-Pink-500 bg">K</small></h2>
-                      <p>Man</p>
-                    </div>
-                  </div>
-                </div>
-                <div style="margin:0" class="row">
-                  <div class="large-6 columns">
-                    <div class="summary-nest summary-pad-nest"> <span class="text-center"><canvas height="70" width="70" id="partly-cloudy-day"></canvas></span> </div>
-                  </div>
-                  <div class="large-6 columns">
-                    <div class="summary-nest summary-pad-nest">
-                      <h4 class="text-left"><span class="counter-up">05</span>/<span class="counter-up">12</span>/<span class="counter-up">2014</span></h4>
-                      <p class="text-left">Today</p>
-                    </div>
-                  </div>
-                </div>
-                <div style="margin:0" class="row summary-border-bottom">
-                  <div class="large-6 columns">
-                    <div class="summary-nest summary-pad-nest">
-                      <h2 class="text-black "><span class="counter-up">82</span><small class="palette-Lime-500 bg ">%</small></h2>
-                      <p>Avarage Sales</p>
-                    </div>
-                  </div>
-                  <div class="large-6 columns summary-border-left">
-                    <div class="summary-nest summary-pad-nest">
-                      <h2 class="text-black"><span class="counter-up">24</span><small class="palette-Teal-500 bg ">th</small></h2>
-                      <p>Overall Rank</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- end .timeline -->
-            </div>
-            <!--end of SUMMARY-->
-            <!-- Even Item -->
-            <div class="box no-shadow">
-              <div class="box-header bg-transparent">
-                <!-- tools box -->
-                <div class="pull-right box-tools "> <span class="box-btn" data-widget="collapse"><i class="icon-minus"></i>
-                                          </span> <span class="box-btn" data-widget="remove"><i class="icon-cross"></i>
-                                          </span> </div>
-                <h3 class="box-title "><i class="palette-Teal-400 text ti-notepad"></i>
-                                            <span>LAST POST</span>
-                                          </h3> </div>
-              <!-- /.box-header -->
-              <div class="box-body" style="display: block;">
-                <div class="events-nest">
-                  <div class="text-white lastest-post-nest">
-                    <div> <small class="palette-Teal-400 bg">NY</small>
-                      <h4>Pink and Blue: Coloring Inside the Lines of Gender</h4> <span><i class="ti-eye"></i> 121</span> <span><i class="ti-thumb-up"></i>45</span> <span><i class="ti-comment-alt"></i> 8</span></div>
-                  </div>
-                  <ul>
-                    <li>
-                      <h4><span>Mike Nikolson</span><small>2 Minute</small></h4>
-                      <h3>How Science Is Helping Us Understand Gender</h3>
-                      <hr> </li>
-                    <li>
-                      <h4><span>Mark Jorgensen</span><small>1 hours</small></h4>
-                      <h3>The Best Maps of 2016</h3>
-                      <hr> </li>
-                    <li>
-                      <h4><span>Mark Jorgensen</span><small>1 Days</small></h4>
-                      <h3>Winter Solstice Is Comingâ€”Yearâ€™s Shortest Day Explained</h3>
-                      <hr> </li>
-                    <li>
-                      <h4><span>Mark Jorgensen</span><small>1 Month</small></h4>
-                      <h3>Inside Americaâ€™s Shocking WWII Propaganda Machine</h3> </li>
-                  </ul>
-                </div>
-              </div>
-              <!-- /.box-body -->
-            </div>
-            <!-- End of Even Item -->
-          </div>
-          <!--End of Right Side-->
         </div>
+      </div> -->
+    </div>
+  </div>
+
+  <div class="large-6 columns">
+    <div class="row">
+      <div class="large-6 columns">
+        <div class="box palette-Lime-A400 bg">
+          <div class="box-body no-pad" style="display: block;">
+            <div class="events-nest ">
+              <div class="wrap-no-pad text-white" >
+                <br>
+                <img alt="" style="margin-left: auto; margin-right: auto; display: block;" src="{% static "img/templates/trigger.png" %}" width="100px" height="100px" >
+                <h4 class="text-white"><b>Triggers</b></h4>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-6 columns">
+        <div class="box palette-Deep-Orange-A400 bg">
+          <div class="box-body no-pad" style="display: block;">
+            <div class="events-nest ">
+              <div class="wrap-no-pad text-white" >
+                <br>
+                <img alt="" style="margin-left: auto; margin-right: auto; display: block;" src="{% static "img/templates/bookmark.png" %}" width="100px" height="100px" >
+                <h4 class="text-white"><b>Bookmarks</b></h4>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-6 columns">
+        <div class="box palette-Yellow-800 bg">
+          <div class="box-body no-pad" style="display: block;">
+            <div class="events-nest ">
+              <div class="wrap-no-pad text-white" >
+                <br>
+                <img alt="" style="margin-left: auto; margin-right: auto; display: block;" src="{% static "img/templates/download.png" %}" width="100px" height="100px" >
+                <h4 class="text-white"><b>Downloads</b></h4>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="large-6 columns">
+        <div class="box palette-Deep-Purple bg">
+          <div class="box-body no-pad" style="display: block;">
+            <div class="events-nest ">
+              <div class="wrap-no-pad text-white">
+                <br>
+                <img alt="" style="margin-left: auto; margin-right: auto; display: block;" src="{% static "img/templates/links.png" %}" width="100px" height="100px" >
+                <h4 class="text-white"><b>Links</b></h4>
+                <br>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
 {% endblock content %}
