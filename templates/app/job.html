@@ -40,7 +40,8 @@
                   <h4 style="color: red">{{message}}</h4>
 
                   <div class="form-group">
-                    <label class="sr-only" >Brand Name:</label>
+
+                    <label  >Brand Name:</label>
                     <select name="brand" class="form-control" onchange="report(this.value)">
                       {%for each in brands %}
                         <option value={{each.pk}}>{{each.name}}</option>
@@ -51,14 +52,14 @@
 
 
                   <div class="form-group">
-                    <label class="sr-only" name="brand">Division Name:</label>
+                    <label  name="brand">Division Name:</label>
                     <select id="mySelect" multiple class="form-control" required>
 
                     </select>
                   </div>
 
                   <div class="form-group">
-                    <label class="sr-only">Job Name:</label>
+                    <label >Job Name:</label>
                     <input type="text" class="form-control" name="jobsName" required>
                   </div>
 
@@ -109,10 +110,10 @@
                       </tbody>
                     </table>
 
-                    <label class="sr-only" name="active">Active:</label>
-                    <select class="form-control" required>
-                          <option value="True">Active<option>
-                          <option value="False">Inactive<option>
+                    <label  >Active:</label>
+                    <select name="active" class="form-control" required>
+                          <option value="True">Active</option>
+                          <option value="False">Inactive</option>
                     </select>
                   </div>
 

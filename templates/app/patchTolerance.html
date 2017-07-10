@@ -17,24 +17,24 @@
                   <br>
                   <h4 style="color: red">{{message}}</h4>
                   <div class="form-group">
-                    <label class="sr-only">Name:</label>
+                    <label >Name:</label>
                     <input type="text" class="form-control" name="name" required>
                   </div>
 
                   <div class="form-group">
-                    <label class="sr-only">Desc:</label>
+                    <label >Desc:</label>
                     <input type="text" class="form-control" name="desc" required>
                   </div>
 
                   <div class="form-group">
-                    <label class="sr-only">Version:</label>
+                    <label >Version:</label>
                     <input type="text" class="form-control" name="version" required>
                   </div>
 
                   {% for i in range36 %}
 
                   <div class="form-group">
-                    <label class="sr-only">Spectral {{i}}:</label>
+                    <label >Spectral {{i}}:</label>
                     <input type="text" class="form-control" name="spectral{{i}}" required>
                   </div>
 
@@ -44,34 +44,36 @@
                   {% for i in labRange %}
 
                   <div class="form-group">
-                    <label class="sr-only">Lab {{i}}:</label>
+                    <label >Lab {{i}}:</label>
                     <input type="text" class="form-control" name="lab{{i}}" required>
                   </div>
 
                   {% endfor %}
 
                   <div class="form-group">
-                    <label class="sr-only">Density:</label>
+                    <label >Density:</label>
                     <input type="text" class="form-control" name="density" required>
                   </div>
 
                   <div class="form-group">
-                    <label class="sr-only">Dot Gain:</label>
+                    <label >Dot Gain:</label>
                     <input type="text" class="form-control" name="dotGain" required>
                   </div>
 
                   <div class="form-group">
-                    <label class="sr-only">Print Contrast:</label>
+                    <label >Print Contrast:</label>
                     <input type="text" class="form-control" name="printContrast" required>
                   </div>
 
                   <div class="form-group">
-                    <label class="sr-only">G7:</label>
+                    <label >G7:</label>
                     <input type="text" class="form-control" name="G7" required>
                   </div>
 
+
+
                   <div class="form-group">
-                    <label class="sr-only">Trap:</label>
+                    <label >Trap:</label>
                     <input type="text" class="form-control" name="trap" required>
                   </div>
 
@@ -81,7 +83,7 @@
                   {% for i in metamerismLevelRange %}
 
                   <div class="form-group">
-                    <label class="sr-only">Metamerism Level {{i}}:</label>
+                    <label >Metamerism Level {{i}}:</label>
                     <input type="text" class="form-control" name="metamerismLevel{{i}}" required>
                   </div>
 
@@ -90,7 +92,7 @@
                   {% for i in dE2000LevelRange %}
 
                   <div class="form-group">
-                    <label class="sr-only">D E2000 Level {{i}}:</label>
+                    <label >D E2000 Level {{i}}:</label>
                     <input type="text" class="form-control" name="dE2000Level{{i}}" required>
                   </div>
 
@@ -99,10 +101,10 @@
 
 
                   <div class="form-group">
-                    <label class="sr-only" name="active">Active:</label>
-                    <select class="form-control" required>
-                          <option value="True">Active<option>
-                          <option value="False">Inactive<option>
+                    <label>Active:</label>
+                    <select name="active" class="form-control" required>
+                          <option value="True">Active</option>
+                          <option value="False">Inactive</option>
                     </select>
                   </div>
 
