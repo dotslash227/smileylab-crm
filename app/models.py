@@ -9,20 +9,20 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Setting(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     setting_value = models.CharField(max_length=150, null=True)
     def __str__(self):
         return self.name
 
 class MemberType(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     def __str__(self):
         return self.name
 
 class FileCategory(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     def __str__(self):
         return self.name
 
@@ -30,13 +30,13 @@ class FileRepository(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     active = models.BooleanField(default=True)
     fileCategory = models.ForeignKey(FileCategory)
-    file_name = models.CharField(max_length=150, null=True)
+    file_name = models.CharField(max_length=150, blank=True, null=True)
     def __str__(self):
         return self.file_name
 
 class Member(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     memberType = models.ForeignKey(MemberType)
     def __str__(self):
         return self.name
@@ -47,8 +47,8 @@ class MemberProperty(models.Model):
     filterValue = models.BooleanField(default=True)
     member = models.ForeignKey(Member)
     possible_values = models.CharField(max_length=150, null=True)
-    property_name = models.CharField(max_length=150, null=True)
-    table_name = models.CharField(max_length=150, null=True)
+    property_name = models.CharField(max_length=150, blank=True, null=True)
+    table_name = models.CharField(max_length=150, blank=True, null=True)
     memberType = models.ForeignKey(MemberType)
     def __str__(self):
         return self.property_name
@@ -64,14 +64,14 @@ class Evaluation(models.Model):
 class MemberPreference(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     member = models.ForeignKey(Member)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     value = models.CharField(max_length=150, null=True)
     def __str__(self):
         return self.name
 
 class Brand(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     member = models.ForeignKey(Member)
     def __str__(self):
         return self.name
@@ -106,7 +106,7 @@ class PatchTolerance(models.Model):
     metamerism_level1 = models.FloatField(null=True)
     metamerism_level2 = models.FloatField(null=True)
     metamerism_level3 = models.FloatField(null=True)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     print_contrast = models.FloatField(null=True)
     spectral_1 = models.FloatField(null=True)
     spectral_10 = models.FloatField(null=True)
@@ -150,7 +150,7 @@ class PatchTolerance(models.Model):
 class Standard(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     active = models.BooleanField(default=True)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     icc = models.CharField(max_length=150, null=True)
     version = models.CharField(max_length=150, null=True)
     def __str__(self):
@@ -158,14 +158,14 @@ class Standard(models.Model):
 
 class Product(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     brand = models.ForeignKey(Brand)
     def __str__(self):
         return self.name
 
 class Division(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     address = models.CharField(max_length=150, null=True)
     city = models.CharField(max_length=150, null=True)
     state =  models.CharField(max_length=150, null=True)
@@ -203,7 +203,7 @@ class PatchStandard(models.Model):
     lab_c = models.FloatField(null=True)
     lab_h = models.FloatField(null=True)
     lab_l = models.FloatField(null=True)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     patch = models.CharField(max_length=150, null=True)
     print_contrast = models.FloatField(null=True)
     rgb_b = models.IntegerField(null=True)
@@ -253,13 +253,13 @@ class PatchStandard(models.Model):
 
 class Job(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     standard = models.ForeignKey(Standard)
     product = models.ForeignKey(Product)
     avg_de2000 = models.FloatField(null=True)
     color_match = models.CharField(max_length=150, null=True)
     die_lines =  models.CharField(max_length=150, null=True)
-    division = models.ForeignKey(Division)
+    division = models.ManyToManyField(Division)
     dna_drawdown_submissions =  models.CharField(max_length=150, null=True)
     event = models.CharField(max_length=150, null=True)
     fansworth_test = models.CharField(max_length=150, null=True)
@@ -278,12 +278,10 @@ class Job(models.Model):
     spc = models.CharField(max_length = 150, null=True)
     version = models.CharField(max_length = 150, null=True)
     viewing_conditions = models.CharField(max_length = 150, null=True)
-    def __str__(self):
-        return self.name
 
 class Device(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     division = models.ForeignKey(Division)
     divisionType = models.CharField(max_length=150, null=True)
     make = models.CharField(max_length=150, null=True)
@@ -293,7 +291,7 @@ class Device(models.Model):
 
 class UserDivision(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     user = models.ForeignKey(User)
     division = models.ForeignKey(Division)
     def __str__(self):
@@ -301,7 +299,7 @@ class UserDivision(models.Model):
 
 class UserPreference(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
-    name = models.CharField(max_length=150, null=True)
+    name = models.CharField(max_length=150, blank=True, null=True)
     user = models.ForeignKey(User)
     value = models.CharField(max_length=150, null=True)
     def __str__(self):
@@ -408,6 +406,6 @@ class Reading(models.Model):
 class SheetEvaluation(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     memberEvaluation = models.ForeignKey(MemberEvaluation)
-    passName = models.CharField(max_length=150, null=True)
+    passname = models.CharField(max_length=150, blank=True, null=True)
     sheet = models.ForeignKey(Sheet)
     value = models.CharField(max_length=150, null=True)

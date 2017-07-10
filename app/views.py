@@ -77,12 +77,12 @@ def job(request):
         #
         #         )
         # division.save()
-        return render(request, "job.html", {
+        return render(request, "app/job.html", {
             "message":"New Job saved successfully!!!",
             "brands":Brand.objects.all(),
         })
     else:
-        return render(request, "job.html", {
+        return render(request, "app/job.html", {
             "message":"",
             "brands":Brand.objects.all(),
         })
@@ -106,13 +106,13 @@ def division(request):
                         zipCode = zipCode,
                     )
         division.save()
-        return render(request, "division.html", {
+        return render(request, "app/division.html", {
             "message":"New Division saved successfully!!!",
             "members":Member.objects.all(),
             "countries":list(countries),
         })
     else:
-        return render(request, "division.html", {
+        return render(request, "app/division.html", {
             "message":"",
             "members":Member.objects.all(),
             "countries":list(countries),
@@ -131,16 +131,16 @@ def standard(request):
                         version = version,
                     )
         standard.save()
-        return render(request, "standard.html", {
+        return render(request, "app/standard.html", {
             "message":"New Standard saved successfully!!!",
         })
     else:
-        return render(request, "standard.html", {
+        return render(request, "app/standard.html", {
             "message":"",
         })
 
 def patchStandard(request):
-    return render(request, "patchStandard.html",
+    return render(request, "app/patchStandard.html",
                     {
                       "range36":xrange(1,37),
                       "labRange":["L", "A", "B", "C", "H"],
@@ -150,7 +150,7 @@ def patchStandard(request):
                   )
 
 def patchTolerance(request):
-    return render(request, "patchTolerance.html",
+    return render(request, "app/patchTolerance.html",
                     {
                       "range36":xrange(1,37),
                       "labRange":["L", "A", "B", "C", "H"],
@@ -161,10 +161,10 @@ def patchTolerance(request):
                   )
 
 def role(request):
-    return render(request, "role.html", {})
+    return render(request, "app/role.html", {})
 
 def bookmark(request):
-    return render(request, "bookmark.html", {})
+    return render(request, "app/bookmark.html", {})
 
 def link(request):
-    return render(request, "link.html", {})
+    return render(request, "app/link.html", {})
