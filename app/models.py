@@ -146,7 +146,9 @@ class PatchTolerance(models.Model):
     spectral_36 = models.FloatField(null=True)
     trap = models.FloatField(null=True)
     version = models.CharField(max_length=150, null=True)
-
+    def __str__(self):
+        return self.name
+        
 class Standard(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     active = models.BooleanField(default=True)

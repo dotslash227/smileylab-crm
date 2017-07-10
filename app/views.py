@@ -245,14 +245,113 @@ def patchStandard(request):
 
 
 def patchTolerance(request):
-    return render(request, "app/patchTolerance.html",
-    {
-      "range36":xrange(1,37),
-      "labRange":["L", "A", "B", "C", "H"],
-      "metamerismLevelRange": xrange(1,4),
-      "dE2000LevelRange": xrange(1,4),
+    if request.method == "POST":
 
-    })
+        active = str_to_bool(request.POST.get("active"))
+        brand = Brand.objects.get(pk=int(request.POST.get("brand")))
+        dE2000_level1 = request.POST.get("dE2000Level1")
+        dE2000_level2 = request.POST.get("dE2000Level2")
+        dE2000_level3 = request.POST.get("dE2000Level3")
+        print("dE2000_level=>", dE2000_level1, dE2000_level2, dE2000_level3)
+        density = request.POST.get("density")
+        desc =request.POST.get("desc")
+        dot_gain = request.POST.get("dotGain")
+        g7 = request.POST.get("G7")
+        lab_a = request.POST.get("labA")
+        lab_b = request.POST.get("labB")
+        lab_c = request.POST.get("labC")
+        lab_h = request.POST.get("labH")
+        lab_l = request.POST.get("labL")
+        metamerism_level1 = request.POST.get("metamerismLevel1")
+        metamerism_level2 = request.POST.get("metamerismLevel2")
+        metamerism_level3 = request.POST.get("metamerismLevel3")
+        name = request.POST.get("name")
+        print_contrast = request.POST.get("printContrast")
+        trap = request.POST.get("trap")
+        version = request.POST.get("version")
+
+
+        patchTolerance = PatchTolerance(
+                            active = active,
+                            brand = brand,
+                            dE2000_level1 = dE2000_level1,
+                            dE2000_level2 = dE2000_level2,
+                            dE2000_level3 = dE2000_level3,
+                            density = density,
+                            desc =desc,
+                            dot_gain = dot_gain,
+                            g7 = g7,
+                            lab_a = lab_a,
+                            lab_b = lab_b,
+                            lab_c = lab_c,
+                            lab_h = lab_h,
+                            lab_l = lab_l,
+                            metamerism_level1 = metamerism_level1,
+                            metamerism_level2 = metamerism_level2,
+                            metamerism_level3 = metamerism_level3,
+                            name = name,
+                            print_contrast = print_contrast,
+                            spectral_1 = request.POST.get("spectral1"),
+                            spectral_2 = request.POST.get("spectral2"),
+                            spectral_3 = request.POST.get("spectral3"),
+                            spectral_4 = request.POST.get("spectral4"),
+                            spectral_5 = request.POST.get("spectral5"),
+                            spectral_6 = request.POST.get("spectral6"),
+                            spectral_7 = request.POST.get("spectral7"),
+                            spectral_8 = request.POST.get("spectral8"),
+                            spectral_9 = request.POST.get("spectral9"),
+                            spectral_10 = request.POST.get("spectral10"),
+                            spectral_11 = request.POST.get("spectral11"),
+                            spectral_12 = request.POST.get("spectral12"),
+                            spectral_13 = request.POST.get("spectral13"),
+                            spectral_14 = request.POST.get("spectral14"),
+                            spectral_15 = request.POST.get("spectral15"),
+                            spectral_16 = request.POST.get("spectral16"),
+                            spectral_17 = request.POST.get("spectral17"),
+                            spectral_18 = request.POST.get("spectral18"),
+                            spectral_19 = request.POST.get("spectral19"),
+                            spectral_20 = request.POST.get("spectral20"),
+                            spectral_21 = request.POST.get("spectral21"),
+                            spectral_22 = request.POST.get("spectral22"),
+                            spectral_23 = request.POST.get("spectral23"),
+                            spectral_24 = request.POST.get("spectral24"),
+                            spectral_25 = request.POST.get("spectral25"),
+                            spectral_26 = request.POST.get("spectral26"),
+                            spectral_27 = request.POST.get("spectral27"),
+                            spectral_28 = request.POST.get("spectral28"),
+                            spectral_29 = request.POST.get("spectral29"),
+                            spectral_30 = request.POST.get("spectral30"),
+                            spectral_31 = request.POST.get("spectral31"),
+                            spectral_32 = request.POST.get("spectral32"),
+                            spectral_33 = request.POST.get("spectral33"),
+                            spectral_34 = request.POST.get("spectral34"),
+                            spectral_35 = request.POST.get("spectral35"),
+                            spectral_36 = request.POST.get("spectral36"),
+                            trap = trap,
+                            version = version,
+
+
+                        )
+        patchTolerance.save()
+        return render(request, "app/patchTolerance.html", {
+            "message":"New Patch Tolerance saved successfully!!!",
+            "brands" :Brand.objects.all(),
+            "range36":xrange(1,37),
+            "labRange":["L", "A", "B", "C", "H"],
+            "metamerismLevelRange": xrange(1,4),
+            "dE2000LevelRange": xrange(1,4),
+
+        })
+    else:
+        return render(request, "app/patchTolerance.html", {
+            "message":"",
+            "brands" :Brand.objects.all(),
+            "range36":xrange(1,37),
+            "labRange":["L", "A", "B", "C", "H"],
+            "metamerismLevelRange": xrange(1,4),
+            "dE2000LevelRange": xrange(1,4),
+        })
+
 
 def role(request):
     return render(request, "app/role.html", {})
