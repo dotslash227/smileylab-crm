@@ -13,20 +13,50 @@
             <div class="medium-9 columns ">
               <div>
 
+                <script>
+                  //used below for maitaining Color List count
+                  var colorCount=1;
+                </script>
 
                 <script>
                   function report(value) {
                     if (value=="") return; // please select - possibly you want something else here
                     else{
-                      $.get("{%url "app:divisionFromBrand" %}", { "brand": value},
-                          function(divisions){
-                              //  console.log(divisions, divisions["divisions"].length);
-                               $('#mySelect option').remove();
-                               for(var count=0; count < divisions["divisions"].length; count++){
-                                //  console.log("values",divisions["divisions"][count]["id"] );
-                                $('#mySelect').append( new Option(divisions["divisions"][count]["name"],divisions["divisions"][count]["id"]) );
+                      $.get("{%url "app:valuesFromBrand" %}", { "brand": value },
+                          function(values){
+                              console.log("values=", values);
+                               $('#divisionOptions option').remove();
+                               for(var count=0; count < values["divisions"].length; count++){
+                                 //  console.log("values",divisions["divisions"][count]["id"] );
+                                $('#divisionOptions').append( new Option(values["divisions"][count]["name"],values["divisions"][count]["id"]) );
                                }
-                              //  $('#mySelect').append( new Option(text,val) );
+
+
+                              // $('#brandColorOptions1 option').remove();
+                              // for(var count=0; count < values["patchStandards"].length; count++){
+                              // //  console.log("patchStandards",values["patchStandards"][count]["id"], values["patchStandards"][count]["name"] );
+                              //  $('#brandColorOptions1').append( new Option(values["patchStandards"][count]["name"],values["patchStandards"][count]["id"]) );
+                              // }
+                              //
+                              // $('#patchToleranceOptions1 option').remove();
+                              // for(var count=0; count < values["patchTolerances"].length; count++){
+                              //   //  console.log("patchTolerances",values["patchTolerances"][count]["id"], values["patchTolerances"][count]["name"] );
+                              //  $('#patchToleranceOptions1').append( new Option(values["patchTolerances"][count]["name"],values["patchTolerances"][count]["id"]) );
+                              // }
+
+
+                              $('select[name^=brandColor] option').remove();
+                              for(var count=0; count < values["patchStandards"].length; count++){
+                              //  console.log("patchStandards",values["patchStandards"][count]["id"], values["patchStandards"][count]["name"] );
+                               $('select[name^=brandColor]').append( new Option(values["patchStandards"][count]["name"],values["patchStandards"][count]["id"]) );
+                              }
+
+                              $('select[name^=patchTolerance] option').remove();
+                              for(var count=0; count < values["patchTolerances"].length; count++){
+                                //  console.log("patchTolerances",values["patchTolerances"][count]["id"], values["patchTolerances"][count]["name"] );
+                               $('select[name^=patchTolerance]').append( new Option(values["patchTolerances"][count]["name"],values["patchTolerances"][count]["id"]) );
+                              }
+
                       }).fail(function(){
                           console.log("error");
                       });
@@ -41,7 +71,7 @@
 
                   <div class="form-group">
 
-                    <label  >Brand Name:</label>
+                    <label>Brand Name:</label>
                     <select name="brand" class="form-control" onchange="report(this.value)">
                       {%for each in brands %}
                         <option value={{each.pk}}>{{each.name}}</option>
@@ -53,8 +83,7 @@
 
                   <div class="form-group">
                     <label  name="brand">Division Name:</label>
-                    <select id="mySelect" multiple class="form-control" required>
-
+                    <select id="divisionOptions" name="divisions" multiple class="form-control" required>
                     </select>
                   </div>
 
@@ -78,39 +107,45 @@
 
                         </tr>
                       </thead>
-                      <script>
-                        var count=1;
-                      </script>
+
                       <script>
                         function fieldAdd() {
-                          count+=1;
+                          colorCount+=1;
                           $('#addTable').append(
-                            "<tr><td><input type='text' class='form-control' name='colorList"+count+"'></td><td><input type='text' class='form-control' name='brandColor"+count+"'></td><td><input type='text' class='form-control' name='patchTolerance"+count+"'></td><td></tr>"
+                            `<tr>
+                              <td><label  name='colorListLable`+colorCount+`'>Color List `+colorCount+`</label></td>
+                              <td><select id='brandColorOptions`+colorCount+`' name='brandColor`+colorCount+`' class='form-control'></select></td>
+                              <td><select id='patchToleranceOptions`+colorCount+`' name='patchTolerance`+colorCount+`' class='form-control'></select></td>
+                              <td></td>
+                            </tr>`
                           )
                         }
                       </script>
                       <script>
                       function fieldRemove() {
-                        count-=1;
-                        console.log("here");
-                        $('#addTable tr').last().remove()
+                        if(colorCount!=1){
+                          colorCount-=1;
+                          console.log("here");
+                          $('#addTable tr').last().remove()
+                        }
                         return false;
+
                       }
 
                       </script>
 
                       <tbody id="addTable">
                         <tr>
-                          <td><input type="text" class="form-control" name="colorList1" required></td>
-                          <td><input type="text" class="form-control" name="brandColor1" required></td>
-                          <td><input type="text" class="form-control" name="patchTolerance1" required></td>
+                          <td><label  name="colorListLable1">Color List 1</label></td>
+                          <td><select id="brandColorOptions1" name="brandColor1" class="form-control"></select></td>
+                          <td><select id="patchToleranceOptions1" name="patchTolerance1" class="form-control"></select></td>
                           <td></td>
                         </tr>
 
                       </tbody>
                     </table>
 
-                    <label  >Active:</label>
+                    <label>Active:</label>
                     <select name="active" class="form-control" required>
                           <option value="True">Active</option>
                           <option value="False">Inactive</option>

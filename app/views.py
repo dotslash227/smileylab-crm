@@ -37,9 +37,11 @@ def index(request):
         else:
             return render(request, "login.html", {})
 
-def divisionFromBrand(request):
+def valuesFromBrand(request):
     resp_dict = {}
-    resp_list=[]
+    div_list=[]
+    ps_list=[]
+    pt_list=[]
 
     if request.method == "GET":
         brand = Brand.objects.get(pk=int(request.GET.get("brand")))
@@ -49,9 +51,24 @@ def divisionFromBrand(request):
             data = {}
             data["id"]=each.id
             data["name"]=each.name
-            resp_list.append(data)
+            div_list.append(data)
+        resp_dict["divisions"]=div_list
+        patchStandard = PatchStandard.objects.filter(brand=brand)
+        for each in patchStandard:
+            data = {}
+            data["id"]=each.id
+            data["name"]=each.name
+            ps_list.append(data)
+        resp_dict["patchStandards"]=ps_list
 
-        resp_dict["divisions"]=resp_list
+        patchTolerance = PatchTolerance.objects.filter(brand=brand)
+        for each in patchTolerance:
+            data = {}
+            data["id"]=each.id
+            data["name"]=each.name
+            pt_list.append(data)
+        resp_dict["patchTolerances"]=pt_list
+
         return JsonResponse(resp_dict,safe=False)
     else:
         return JsonResponse({"error":"error"})
@@ -243,7 +260,6 @@ def patchStandard(request):
             "rgbRange": ["R", "G", "B"],
         })
 
-
 def patchTolerance(request):
     if request.method == "POST":
 
@@ -351,7 +367,6 @@ def patchTolerance(request):
             "metamerismLevelRange": xrange(1,4),
             "dE2000LevelRange": xrange(1,4),
         })
-
 
 def role(request):
     return render(request, "app/role.html", {})
