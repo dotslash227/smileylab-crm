@@ -148,7 +148,7 @@ class PatchTolerance(models.Model):
     version = models.CharField(max_length=150, null=True)
     def __str__(self):
         return self.name
-        
+
 class Standard(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     active = models.BooleanField(default=True)
@@ -254,9 +254,10 @@ class PatchStandard(models.Model):
         return self.name
 
 class Job(models.Model):
+    active= models.BooleanField(default=True)
     date_added = models.DateTimeField(default=timezone.now)
     name = models.CharField(max_length=150, blank=True, null=True)
-    standard = models.ForeignKey(Standard)
+    standard = models.ForeignKey(Standard, null=True)
     product = models.ForeignKey(Product)
     avg_de2000 = models.FloatField(null=True)
     color_match = models.CharField(max_length=150, null=True)
@@ -280,6 +281,8 @@ class Job(models.Model):
     spc = models.CharField(max_length = 150, null=True)
     version = models.CharField(max_length = 150, null=True)
     viewing_conditions = models.CharField(max_length = 150, null=True)
+    def __str__(self):
+        return self.name
 
 class Device(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
@@ -310,8 +313,8 @@ class UserPreference(models.Model):
 class JobPatch(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     job = models.ForeignKey(Job)
-    patch_standard_id=models.IntegerField(null=True)
-    patch_tolerance_id=models.IntegerField(null=True)
+    patch_standard=models.ForeignKey(PatchStandard, null=True)
+    patch_tolerance=models.ForeignKey(PatchTolerance, null=True)
 
 class Sheet(models.Model):
     date_added = models.DateTimeField(default=timezone.now)

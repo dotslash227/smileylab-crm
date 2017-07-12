@@ -42,6 +42,7 @@ def valuesFromBrand(request):
     div_list=[]
     ps_list=[]
     pt_list=[]
+    prod_list=[]
 
     if request.method == "GET":
         brand = Brand.objects.get(pk=int(request.GET.get("brand")))
@@ -69,31 +70,54 @@ def valuesFromBrand(request):
             pt_list.append(data)
         resp_dict["patchTolerances"]=pt_list
 
+        product = Product.objects.filter(brand=brand)
+        for each in product:
+            data = {}
+            data["id"]=each.id
+            data["name"]=each.name
+            prod_list.append(data)
+        resp_dict["products"]=prod_list
+
+
         return JsonResponse(resp_dict,safe=False)
     else:
         return JsonResponse({"error":"error"})
 
 def job(request):
     if request.method == "POST":
-        brand = Brand.objects.get(pk=int(request.POST.get("brand")))
-        division
-        job
+        #brand = Brand.objects.get(pk=int(request.POST.get("brand")))
+        product = Product.objects.get(pk=int(request.POST.get("product")))
+        divisions = request.POST.getlist("divisions")
+        print("divisions", divisions)
+        name = request.POST.get("jobName")
         active = str_to_bool(request.POST.get("active"))
 
-        # name = request.POST.get("name")
-        # address = request.POST.get("address")
-        # city = request.POST.get("city")
-        # state = request.POST.get("state")
-        # country = request.POST.get("country")
-        # zipCode = int(request.POST.get("zip"))
-        # member = Member.objects.get(pk=int(request.POST.get("member")))
-        # job = Job(
-        #             brand = brand,
-        #             division = division,
-        #             job = brand,
-        #
-        #         )
-        # division.save()
+        job = Job(
+                    product = product,
+                    name=name,
+                    active=active,
+                )
+        job.save()
+        #my_obj.categories.add(fragmentCategory.objects.get(id=1))
+        job = Job.objects.filter(name=name)[0]
+        for each in divisions:
+            division = Division.objects.get(pk=int(each))
+            job.division.add(division)
+
+        countOfColor = int(request.POST.get("countOfColor"))
+        print("countOfColor", countOfColor)
+        for i in xrange(1, countOfColor+1):
+            jobPatch = JobPatch(
+                job=job,
+                patch_standard=PatchStandard.objects.get(pk=int(request.POST.get("brandColor"+str(i)))),
+                patch_tolerance=PatchTolerance.objects.get(pk=int(request.POST.get("patchTolerance"+str(i)))),
+            )
+            jobPatch.save()
+
+        # colorLists-> brandcolor(patchStandards, patchTolerances)
+
+
+
         return render(request, "app/job.html", {
             "message":"New Job saved successfully!!!",
             "brands":Brand.objects.all(),
