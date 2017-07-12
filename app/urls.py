@@ -12,5 +12,6 @@ urlpatterns = [
     url(r'^bookmark$', views.bookmark, name="bookmark"),
     url(r'^link$', views.link, name="link"),
     url(r'^valuesFromBrand$', views.valuesFromBrand, name="valuesFromBrand"),
+    url(r'^showJobs$', views.showJobs, name="showJobs"),
 
 ]

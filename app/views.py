@@ -7,7 +7,6 @@ from .models import *
 from django_countries import countries
 from django.http import JsonResponse
 
-
 def str_to_bool(s):
     if s == 'False':
         return False
@@ -400,3 +399,13 @@ def bookmark(request):
 
 def link(request):
     return render(request, "app/link.html", {})
+
+def showJobs(request):
+    jobs= Job.objects.all()
+    print(len(jobs))
+    for each in jobs:
+        print(each.division.all())
+    return render(request, "app/showJobs.html", {
+        "jobs": jobs,
+        "jobsLen": xrange(1, len(jobs)+1),
+    })
