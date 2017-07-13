@@ -409,3 +409,38 @@ def showJobs(request):
         "jobs": jobs,
         "jobsLen": xrange(1, len(jobs)+1),
     })
+
+def showBrands(request):
+    brands= Brand.objects.all()
+    return render(request, "app/showBrands.html", {
+        "brands": brands,
+    })
+
+def showDivisions(request):
+    divisions= Division.objects.all()
+    return render(request, "app/showDivisions.html", {
+        "divisions": divisions,
+    })
+
+def showStandards(request):
+    standards= Standard.objects.all()
+    return render(request, "app/showStandards.html", {
+        "standards": standards,
+    })
+
+def showEvalutions(request):
+    #evalutions= Evaluation.objects.all()
+    return render(request, "app/showEvaluations.html", {
+        #"evaluations": evaluations,
+    })
+
+def showMemberEvaluations(request):
+    #memberEvaluations= MemberEvaluation.objects.all()
+    return render(request, "app/showMemberEvaluations.html", {
+        #"memberEvaluations": memberEvaluations,
+    })
+def showMemberProperty(request):
+    #membetProperty= MemberProperty.objects.all()
+    return render(request, "app/showMemberProperty.html", {
+        #"memberProperty": memberProperty,
+    })

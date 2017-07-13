@@ -1,0 +1,44 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %} Show Evaluations {% endblock title %} {% block content %}
+<div class="row" style="margin-top:-20px">
+  <div class="large-12 columns">
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="box palette-Grey-300 bg">
+          <div class="box-header  palette-Grey-300 bg">
+            <h3 class="box-title"><span class="text-white">&nbsp;&nbsp;&nbsp;Show Evaluations</span></h3>
+            <div class="pull-right text-white box-tools">
+              <span class="text-white box-btn"><i class="circle-nest-medium ti-notepad"></i>
+              </span> &nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="medium-9 columns ">
+              <div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Evaluation Names</th>
+                      <th>Edit</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for each in evaluations %}
+                      <tr>
+                        <td>{{each.name}}</td>
+                        <td><button type="button" name="edit{{forloop.counter}}" class="btn">Edit <i class="fa fa-pencil" aria-hidden="true"></i></td></button>
+                        <td><button type="button" name="delete{{forloop.counter}}" class="btn">Delete <i class="fa fa-trash" aria-hidden="true"></i></td></button>
+                      </tr>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

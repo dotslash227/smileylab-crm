@@ -36,6 +36,7 @@
                         <td>{{each.name}}</td>
                         <td>
                           <select name="menu{{forloop.counter}}" class="form-control" required>
+                            <option disabled selected value> -- select an option -- </option>
                             <option value="brandColor{{forloop.counter}}">Brand Color</option>
                             <option value="numericalTrend{{forloop.counter}}">Numerical Trend</option>
                             <option value="visualTrend{{forloop.counter}}">Visual Trend</option>

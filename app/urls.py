@@ -13,5 +13,11 @@ urlpatterns = [
     url(r'^link$', views.link, name="link"),
     url(r'^valuesFromBrand$', views.valuesFromBrand, name="valuesFromBrand"),
     url(r'^showJobs$', views.showJobs, name="showJobs"),
+    url(r'^showBrands$', views.showBrands, name="showBrands"),
+    url(r'^showDivisions$', views.showDivisions, name="showDivisions"),
+    url(r'^showStandards$', views.showStandards, name="showStandards"),
+    url(r'^showEvalutions$', views.showEvalutions, name="showEvalutions"),
+    url(r'^showMemberEvaluations$', views.showMemberEvaluations, name="showMemberEvaluations"),
+    url(r'^showMemberProperty$', views.showMemberProperty, name="showMemberProperty"),
 
 ]

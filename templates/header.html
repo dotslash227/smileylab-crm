@@ -39,15 +39,21 @@
                   <a class="tooltip-tip" href="#"> <i class="palette-Indigo-700 bg ti-layout"></i> <span>JOB</span> </a>
                   <ul>
                     <li><a href="{% url "app:job" %}">New Job</a></li>
-                    <li><a href="#">Show Jobs</a></li>
+                    <li><a href="{% url "app:showJobs"%}">Show Jobs</a></li>
                     <li><a href="#">Status</a></li>
+                  </ul>
+                </li>
+                <li>
+                  <a class="tooltip-tip" href="#"> <i class="palette-Indigo-700 bg fa fa-bold"></i> <span>BRAND</span> </a>
+                  <ul>
+                    <li><a href="{% url "app:showBrands"%}">Show Brands</a></li>
                   </ul>
                 </li>
                 <li>
                   <a class="tooltip-tip" href="#" title="Division"> <i class="intial palette-Blue-700 bg ti-email"></i> <span>Division</span> </a>
                   <ul>
                     <li><a href="{% url "app:division" %}">New Division</a></li>
-                    <li><a href="#">Show Divisions</a></li>
+                    <li><a href="{% url "app:showDivisions"%}">Show Divisions</a></li>
                   </ul>
                 </li>
                 <li>
@@ -55,12 +61,12 @@
                   </span> </a>
                   <ul>
                     <li><a href="{% url "app:standard" %}">New Standards</a></li>
-                    <li><a href="#">Show Standards</a></li>
-                    <li><a href="#">Show Evaluations</a></li>
+                    <li><a href="{% url "app:showStandards" %}">Show Standards</a></li>
+                    <li><a href="{% url "app:showEvalutions" %}">Show Evaluations</a></li>
                     <li><a href="{% url "app:patchStandard" %}">New Brand Color</a></li>
-                    <li><a href="{% url "app:patchTolerance"%}">New Patch Tolerance</a></li>
-                    <li><a href="#">Show Member Evaluation</a></li>
-                    <li><a href="#">Show Member Property</a></li>
+                    <li><a href="{% url "app:patchTolerance" %}">New Patch Tolerance</a></li>
+                    <li><a href="{% url "app:showMemberEvaluations" %}">Show Member Evaluation</a></li>
+                    <li><a href="{% url "app:showMemberProperty" %}">Show Member Property</a></li>
                   </ul>
                 </li>
                 <li>
