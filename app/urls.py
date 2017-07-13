@@ -11,7 +11,9 @@ urlpatterns = [
     url(r'^role$', views.role, name="role"),
     url(r'^bookmark$', views.bookmark, name="bookmark"),
     url(r'^link$', views.link, name="link"),
+
     url(r'^valuesFromBrand$', views.valuesFromBrand, name="valuesFromBrand"),
+
     url(r'^showJobs$', views.showJobs, name="showJobs"),
     url(r'^showBrands$', views.showBrands, name="showBrands"),
     url(r'^showDivisions$', views.showDivisions, name="showDivisions"),
@@ -21,6 +23,8 @@ urlpatterns = [
     url(r'^showMemberProperty$', views.showMemberProperty, name="showMemberProperty"),
     url(r'^upload$', views.upload, name="upload"),
     url(r'^showUploads$', views.showUploads, name="showUploads"),
+
+    url(r'^editJob/(?P<ID>\d+)$', views.editJob, name="editJob"),
 
 
 ]

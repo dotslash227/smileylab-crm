@@ -10,6 +10,7 @@
               <span class="text-white box-btn"><i class="circle-nest-medium ti-notepad"></i>
               </span> &nbsp;&nbsp;&nbsp;
             </div>
+
             <div class="medium-9 columns ">
               <div>
                 <br><br>
@@ -36,22 +37,35 @@
                         </td>
                         <td>{{each.name}}</td>
                         <td>
-                          <select name="menu{{forloop.counter}}" class="form-control" required>
+                          <select name="{{forloop.counter}}" class="form-control" onchange="selected(this);" required>
                             <option disabled selected value> -- select an option -- </option>
-                            <option value="brandColor{{forloop.counter}}">Brand Color</option>
-                            <option value="numericalTrend{{forloop.counter}}">Numerical Trend</option>
-                            <option value="visualTrend{{forloop.counter}}">Visual Trend</option>
-                            <option value="copy{{forloop.counter}}">Copy</option>
-                            <option value="edit{{forloop.counter}}">Edit Jobs</option>
-                            <option value="delete{{forloop.counter}}">Delete Job</option>
+                            <option value="{{each.pk}}">Brand Color</option>
+                            <option value="{{each.pk}}">Numerical Trend</option>
+                            <option value="{{each.pk}}">Visual Trend</option>
+                            <option value="{{each.pk}}">Copy</option>
+                            <option value="{{each.pk}}">Edit Jobs</option>
+                            <option value="{{each.pk}}">Delete Job</option>
                           </select>
                         </td>
+
                       </tr>
                     {% endfor %}
 
                   </tbody>
                 </table>
+                <script type="text/javascript">
+                    function selected(item){
+                      //alert(item.options[item.selectedIndex].text);
+                      value = item.options[item.selectedIndex].value;
+                      text = item.options[item.selectedIndex].text;
+                      console.log("text=>", text);
+                      if(text.localeCompare("Edit Jobs")==0){
+                        location.href = "/editJob/"+value;
+                      }
 
+
+                    }
+                </script>
               </div>
             </div>
           </div>

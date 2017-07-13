@@ -257,6 +257,7 @@ class PatchStandard(models.Model):
 class Job(models.Model):
     active= models.BooleanField(default=True)
     date_added = models.DateTimeField(default=timezone.now)
+    brand = models.ForeignKey(Brand, null=True)
     name = models.CharField(max_length=150, blank=True, null=True)
     standard = models.ForeignKey(Standard, null=True)
     product = models.ForeignKey(Product)
