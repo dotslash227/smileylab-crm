@@ -444,3 +444,27 @@ def showMemberProperty(request):
     return render(request, "app/showMemberProperty.html", {
         #"memberProperty": memberProperty,
     })
+
+def upload(request):
+    if request.method == "POST":
+        fileCategory = FileCategory.objects.get(pk= int(request.POST.get("category")))
+        file_name = request.POST.get("name")
+        fileUploaded = request.FILES["file"]
+        active = str_to_bool(request.POST.get("active"))
+
+        fileRepository = FileRepository(
+                        active = active,
+                        fileCategory = fileCategory,
+                        file_name = file_name,
+                        fileUploaded = fileUploaded,
+                        )
+        fileRepository.save()
+        return render(request, "app/upload.html", {
+            "message":"File Uploaded!!!",
+            "category": FileCategory.objects.all(),
+        })
+    else:
+        return render(request, "app/upload.html", {
+            "message":"",
+            "category": FileCategory.objects.all(),
+        })

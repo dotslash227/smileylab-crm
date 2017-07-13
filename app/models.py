@@ -31,6 +31,7 @@ class FileRepository(models.Model):
     active = models.BooleanField(default=True)
     fileCategory = models.ForeignKey(FileCategory)
     file_name = models.CharField(max_length=150, blank=True, null=True)
+    fileUploaded = models.FileField(max_length=150, upload_to="fileRepository/", null=True)
     def __str__(self):
         return self.file_name
 
