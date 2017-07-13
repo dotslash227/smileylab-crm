@@ -468,3 +468,9 @@ def upload(request):
             "message":"",
             "category": FileCategory.objects.all(),
         })
+
+def showUploads(request):
+    fileRepository= FileRepository.objects.all()
+    return render(request, "app/showUploads.html", {
+        "fileRepository": fileRepository,
+    })

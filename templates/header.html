@@ -25,7 +25,7 @@
                     <span>Dashboard</span>
                   </a>
                   <ul>
-                    <li><a href="{% url "app:job" %}">Jobs/Status</a></li>
+                      <li><a href="{% url "app:job" %}">Jobs/Status</a></li>
                     <li><a href="#">Numerical Analysis</a></li>
                     <li><a href="#">Visual Analysis</a></li>
                     <li><a href="#">Analytics</a></li>
@@ -83,7 +83,7 @@
                   <a class="tooltip-tip" href="#" title="Extra"> <i class="intial palette-Orange-700 bg ti-zip"></i> <span>Uploads</span> </a>
                   <ul>
                     <li><a href="{% url "app:upload" %}">New Upload</a></li>
-                    <li><a href="#">Show Uploads</a></li>
+                    <li><a href="{% url "app:showUploads" %}">Show Uploads</a></li>
                     <li><a href="#">Show File Category</a></li>
                   </ul>
                 </li>

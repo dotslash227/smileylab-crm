@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^showMemberEvaluations$', views.showMemberEvaluations, name="showMemberEvaluations"),
     url(r'^showMemberProperty$', views.showMemberProperty, name="showMemberProperty"),
     url(r'^upload$', views.upload, name="upload"),
+    url(r'^showUploads$', views.showUploads, name="showUploads"),
 
 
 ]
