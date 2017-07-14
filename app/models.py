@@ -264,7 +264,7 @@ class Job(models.Model):
     avg_de2000 = models.FloatField(null=True, blank=True)
     color_match = models.CharField(max_length=150, null=True, blank=True)
     die_lines =  models.CharField(max_length=150, null=True, blank=True)
-    division = models.ManyToManyField(Division)
+    division = models.ManyToManyField(Division, null=True, blank=True)
     dna_drawdown_submissions =  models.CharField(max_length=150, null=True, blank=True)
     event = models.CharField(max_length=150, null=True, blank=True)
     fansworth_test = models.CharField(max_length=150, null=True, blank=True)

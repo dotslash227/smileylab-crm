@@ -478,11 +478,8 @@ def showUploads(request):
 
 def editJob(request, ID):
     ID = int(ID)
-    print("ID=", ID)
     job = Job.objects.get(pk=ID)
-    print(job)
     brands=Brand.objects.all()
-    print("brandd==", job.brand)
 
     divs = []
     patchStandards = []
@@ -491,29 +488,54 @@ def editJob(request, ID):
     divisions = job.division.all()
     for each in divisions:
         divs.append(each.id)
-    print("divs=", divs)
 
     jobPatch = JobPatch.objects.filter(job=job)
     for each in jobPatch:
         patchStandards.append(each.patch_standard.id)
         patchTolerances.append(each.patch_tolerance.id)
 
-    print("jobPatch=", jobPatch)
-    if request.method == "POST":
 
-        #brand = Brand.objects.get(pk=int(request.POST.get("brand")))
-        # product = Product.objects.get(pk=int(request.POST.get("product")))
-        # divisions = request.POST.getlist("divisions")
-        # print("divisions", divisions)
-        # name = request.POST.get("jobName")
-        # active = str_to_bool(request.POST.get("active"))
-        #
-        # job = Job(
-        #             product = product,
-        #             name=name,
-        #             active=active,
-        #         )
-        # job.save()
+    if request.method == "POST":
+        newBrand = Brand.objects.get(pk=int(request.POST.get("brand")))
+        newProduct = Product.objects.get(pk=int(request.POST.get("product")))
+        newDivisions = request.POST.getlist("divisions")
+        newName = request.POST.get("jobName")
+        newActive = str_to_bool(request.POST.get("active"))
+
+        job.brand = newBrand
+        job.product = newProduct
+        job.name = newName
+        job.active= newActive
+        job.save()
+
+        job.division.clear()
+        for each in newDivisions:
+            newDivision = Division.objects.get(pk=int(each))
+            job.division.add(newDivision)
+
+        JobPatch.objects.filter(job=job).delete()
+        newCountOfColor = int(request.POST.get("countOfColor"))
+        for i in xrange(1, newCountOfColor+1):
+            newJobPatch = JobPatch(
+                job=job,
+                patch_standard=PatchStandard.objects.get(pk=int(request.POST.get("brandColor"+str(i)))),
+                patch_tolerance=PatchTolerance.objects.get(pk=int(request.POST.get("patchTolerance"+str(i)))),
+            )
+            newJobPatch.save()
+
+        divs = []
+        patchStandards = []
+        patchTolerances = []
+        
+        divisions = job.division.all()
+        for each in divisions:
+            divs.append(each.id)
+
+        jobPatch = JobPatch.objects.filter(job=job)
+        for each in jobPatch:
+            patchStandards.append(each.patch_standard.id)
+            patchTolerances.append(each.patch_tolerance.id)
+
         return render(request, "app/editJob.html", {
             "message":"Job updated successfully!!!",
             "job": job,

@@ -169,8 +169,8 @@
                       <script>
                         function fieldRemove() {
                           if(colorCount!=1){
-                            document.getElementById('countOfColor').value = colorCount;
                             colorCount-=1;
+                            document.getElementById('countOfColor').value = colorCount;
                             $('#addTable tr').last().remove()
                           }
                           return false;
@@ -197,10 +197,10 @@
                     </table>
 
                     <input type="hidden" id="countOfColor" name="countOfColor" value="">
+
                     <script type="text/javascript">
                       colorCount={{jobPatch|length}};
                       document.getElementById('countOfColor').value = colorCount;
-
                     </script>
 
 
