@@ -12,7 +12,7 @@ urlpatterns = [
     url(r'^bookmark$', views.bookmark, name="bookmark"),
     url(r'^link$', views.link, name="link"),
     url(r'^upload$', views.upload, name="upload"),
-    
+
     url(r'^valuesFromBrand$', views.valuesFromBrand, name="valuesFromBrand"),
 
     url(r'^showJobs$', views.showJobs, name="showJobs"),
@@ -26,6 +26,8 @@ urlpatterns = [
 
     url(r'^editJob/(?P<ID>\d+)$', views.editJob, name="editJob"),
     url(r'^deleteJob/(?P<ID>\d+)$', views.deleteJob, name="deleteJob"),
+
+    url(r'^deleteBrand/(?P<ID>\d+)$', views.deleteBrand, name="deleteBrand"),
 
 
 ]

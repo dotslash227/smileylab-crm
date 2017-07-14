@@ -564,10 +564,19 @@ def deleteJob(request, ID):
         print("Doesnt exist")
 
     jobs= Job.objects.all()
-    print(len(jobs))
-    for each in jobs:
-        print(each.division.all())
     return render(request, "app/showJobs.html", {
         "jobs": jobs,
         "jobsLen": xrange(1, len(jobs)+1),
+    })
+
+def deleteBrand(request, ID):
+    ID = int(ID)
+    try:
+        brand = Brand.objects.get(pk=ID).delete()
+    except:
+        print("Doesn't exist")
+
+    brands= Brand.objects.all()
+    return render(request, "app/showBrands.html", {
+        "brands": brands,
     })
