@@ -440,6 +440,7 @@ def showMemberEvaluations(request):
     return render(request, "app/showMemberEvaluations.html", {
         #"memberEvaluations": memberEvaluations,
     })
+
 def showMemberProperty(request):
     #membetProperty= MemberProperty.objects.all()
     return render(request, "app/showMemberProperty.html", {
@@ -580,3 +581,56 @@ def deleteBrand(request, ID):
     return render(request, "app/showBrands.html", {
         "brands": brands,
     })
+
+def deleteDivision(request, ID):
+    ID = int(ID)
+    try:
+        division = Division.objects.get(pk=ID).delete()
+    except:
+        print("Doesn't exist")
+
+    divisions= Division.objects.all()
+    return render(request, "app/showDivisions.html", {
+        "divisions": divisions,
+    })
+
+def editDivision(request, ID):
+    ID = int(ID)
+    division = Division.objects.get(pk=ID)
+
+    if request.method == "POST":
+        newName = request.POST.get("name")
+        newAddress = request.POST.get("address")
+        newCity = request.POST.get("city")
+        newState = request.POST.get("state")
+        newCountry = request.POST.get("country")
+        newZipCode = int(request.POST.get("zip"))
+        newMember = Member.objects.get(pk=int(request.POST.get("member")))
+
+        division.name = newName
+        division.address = newAddress
+        division.city = newCity
+        division.state =  newState
+        division.country = newCountry
+        division.member = newMember
+        division.zipCode = newZipCode
+        division.save()
+        print(division.address)
+        division = Division.objects.get(pk=ID)
+        print(division.address)
+
+        return render(request, "app/editDivision.html", {
+            "message":"Division updated successfully!!!",
+            "division": division,
+            "addresss": division.address,
+            "members":Member.objects.all(),
+            "countries":list(countries),
+        })
+    else:
+        return render(request, "app/editDivision.html", {
+            "message":"",
+            "division": division,
+            "addresss": division.address,
+            "members":Member.objects.all(),
+            "countries":list(countries),
+        })

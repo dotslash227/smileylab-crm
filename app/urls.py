@@ -25,9 +25,10 @@ urlpatterns = [
     url(r'^showUploads$', views.showUploads, name="showUploads"),
 
     url(r'^editJob/(?P<ID>\d+)$', views.editJob, name="editJob"),
+    url(r'^editDivision/(?P<ID>\d+)$', views.editDivision, name="editDivision"),
+
     url(r'^deleteJob/(?P<ID>\d+)$', views.deleteJob, name="deleteJob"),
-
     url(r'^deleteBrand/(?P<ID>\d+)$', views.deleteBrand, name="deleteBrand"),
-
+    url(r'^deleteDivision/(?P<ID>\d+)$', views.deleteDivision, name="deleteDivision"),
 
 ]

@@ -25,14 +25,29 @@
                     {% for each in divisions %}
                       <tr>
                         <td>{{each.name}}</td>
-                        <td><button type="button" name="edit{{forloop.counter}}" class="btn">Edit <i class="fa fa-pencil" aria-hidden="true"></i></td></button>
-                        <td><button type="button" name="delete{{forloop.counter}}" class="btn">Delete <i class="fa fa-trash" aria-hidden="true"></i></td></button>
+                        <td><button type="button" name="edit{{forloop.counter}}" value="{{each.pk}}" class="btn" onclick="editDivision(this)">Edit <i class="fa fa-pencil" aria-hidden="true"></i></td></button>
+                        <td><button type="button" name="delete{{forloop.counter}}" value="{{each.pk}}" class="btn" onclick="deleteDivision(this)">Delete <i class="fa fa-trash" aria-hidden="true"></i></td></button>
                       </tr>
                     {% endfor %}
 
                   </tbody>
                 </table>
+                <script type="text/javascript">
+                    function editDivision(item){
+                      value = item.value;
+                      console.log(value);
+                      location.href = "/editDivision/"+value;
 
+                    }
+
+                    function deleteDivision(item){
+                      //alert(item.options[item.selectedIndex].text);
+                      value = item.value;
+                      console.log(value);
+                      location.href = "/deleteDivision/"+value;
+
+                    }
+                </script>
               </div>
             </div>
           </div>

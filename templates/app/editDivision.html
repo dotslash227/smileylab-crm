@@ -1,11 +1,11 @@
-{% extends "base.html" %} {% load staticfiles %} {% block title %} Home {% endblock title %} {% block content %}
+{% extends "base.html" %} {% load staticfiles %} {% block title %} Edit Division {% endblock title %} {% block content %}
 <div class="row" style="margin-top:-20px">
   <div class="large-12 columns">
     <div class="row">
       <div class="large-12 columns">
         <div class="box palette-Grey-300 bg">
           <div class="box-header  palette-Grey-300 bg">
-            <h3 class="box-title"><span class="text-white">&nbsp;&nbsp;&nbsp;NEW DIVISION</span></h3>
+            <h3 class="box-title"><span class="text-white">&nbsp;&nbsp;&nbsp;EDIT DIVISION</span></h3>
             <div class="pull-right text-white box-tools">
               <span class="text-white box-btn"><i class="circle-nest-medium ti-notepad"></i>
               </span> &nbsp;&nbsp;&nbsp;
@@ -18,45 +18,53 @@
                   <h4 style="color: red">{{message}}</h4>
 
                   <div class="form-group">
-                    <label  >Member Name:</label>
+                    <label>Member Name:</label>
                     <select name="member" class="form-control">
                       {%for each in members %}
+                        {% if each == division.member %}
+                          <option value={{each.pk}} selected>{{each.name}}</option>
+                        {% else %}
+                          <option value={{each.pk}}>{{each.name}}</option>
+                        {% endif %}
                         <option value={{each.pk}}>{{each.name}}</option>
                       {% endfor %}
                     </select>
                   </div>
 
                   <div class="form-group">
-                    <label >Division Name:</label>
-                    <input type="text" class="form-control" name="name" required></input>
+                    <label>Division Name:</label>
+                    <input type="text" class="form-control" name="name" value="{{division.name}}" required></input>
                   </div>
                   <div class="form-group">
-                    <label >Address:</label>
-                    <input type="text" class="form-control" name="address" required></input>
+                    <label>Address:</label>
+                    <input type="text" class="form-control" name="address" value="{{division.address}}" required></input>
                   </div>
                   <div class="form-group">
-                    <label >City:</label>
-                    <input type="text" class="form-control" name="city" required></input>
+                    <label>City:</label>
+                    <input type="text" class="form-control" name="city" value="{{division.city}}" required></input>
                   </div>
                   <div class="form-group">
-                    <label >State:</label>
-                    <input type="text" class="form-control" name="state" required></input>
+                    <label>State:</label>
+                    <input type="text" class="form-control" name="state" value="{{division.state}}" required></input>
                   </div>
                   <div class="form-group">
-                    <label >Country:</label>
+                    <label>Country:</label>
                     <select name="country" class="form-control">
-                      <option disabled selected value> -- select an option -- </option>
                       {%for each in countries %}
-                        <option value={{each.0}}>{{each.1}}</option>
+                        {% if each.0 == division.country %}
+                          <option value={{each.0}} selected>{{each.1}}</option>
+                        {% else %}
+                          <option value={{each.0}}>{{each.1}}</option>
+                        {% endif %}
                       {% endfor %}
                     </select>
                   </div>
                   <div class="form-group">
-                    <label >ZIP:</label>
-                    <input type="text" class="form-control" name="zip" required></input>
+                    <label>ZIP:</label>
+                    <input type="text" class="form-control" name="zip" value="{{division.zipCode}}" required></input>
                   </div>
 
-                  <button type="submit" class="btn btn-default">Create Division</button>
+                  <button type="submit" class="btn btn-default">Update Division</button>
 
                   <br>
                   <br>
