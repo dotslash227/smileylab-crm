@@ -526,7 +526,7 @@ def editJob(request, ID):
         divs = []
         patchStandards = []
         patchTolerances = []
-        
+
         divisions = job.division.all()
         for each in divisions:
             divs.append(each.id)
@@ -555,3 +555,19 @@ def editJob(request, ID):
             "patchSta": patchStandards,
             "patchTol": patchTolerances,
         })
+
+def deleteJob(request, ID):
+    ID = int(ID)
+    try:
+        job = Job.objects.get(pk=ID).delete()
+    except:
+        print("Doesnt exist")
+
+    jobs= Job.objects.all()
+    print(len(jobs))
+    for each in jobs:
+        print(each.division.all())
+    return render(request, "app/showJobs.html", {
+        "jobs": jobs,
+        "jobsLen": xrange(1, len(jobs)+1),
+    })
