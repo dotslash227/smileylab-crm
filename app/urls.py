@@ -27,10 +27,13 @@ urlpatterns = [
     url(r'^editJob/(?P<ID>\d+)$', views.editJob, name="editJob"),
     url(r'^editDivision/(?P<ID>\d+)$', views.editDivision, name="editDivision"),
     url(r'^editStandard/(?P<ID>\d+)$', views.editStandard, name="editStandard"),
+    url(r'^editUpload/(?P<ID>\d+)$', views.editUpload, name="editUpload"),
 
     url(r'^deleteJob/(?P<ID>\d+)$', views.deleteJob, name="deleteJob"),
     url(r'^deleteBrand/(?P<ID>\d+)$', views.deleteBrand, name="deleteBrand"),
     url(r'^deleteDivision/(?P<ID>\d+)$', views.deleteDivision, name="deleteDivision"),
     url(r'^deleteStandard/(?P<ID>\d+)$', views.deleteStandard, name="deleteStandard"),
+    url(r'^deleteUpload/(?P<ID>\d+)$', views.deleteUpload, name="deleteUpload"),
+
 
 ]

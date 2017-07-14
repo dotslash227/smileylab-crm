@@ -668,3 +668,44 @@ def deleteStandard(request, ID):
     return render(request, "app/showStandards.html", {
         "standards": standard,
     })
+
+
+def editUpload(request, ID):
+    ID = int(ID)
+    fileRepository = FileRepository.objects.get(pk=ID)
+
+    if request.method == "POST":
+        newFileCategory = FileCategory.objects.get(pk= int(request.POST.get("category")))
+        newFile_name = request.POST.get("name")
+        newFileUploaded = request.FILES["file"]
+        newActive = str_to_bool(request.POST.get("active"))
+
+        fileRepository.active = newActive
+        fileRepository.fileCategory = newFileCategory
+        fileRepository.file_name = newFile_name
+        fileRepository.fileUploaded = newFileUploaded
+        fileRepository.save()
+
+        return render(request, "app/editUpload.html", {
+            "message":"Upload updated successfully!!!",
+            "fileRepository": fileRepository,
+            "category": FileCategory.objects.all(),
+        })
+    else:
+        return render(request, "app/editUpload.html", {
+            "message":"",
+            "fileRepository": fileRepository,
+            "category": FileCategory.objects.all(),
+        })
+
+def deleteUpload(request, ID):
+    ID = int(ID)
+    try:
+        fileRepository = FileRepository.objects.get(pk=ID).delete()
+    except:
+        print("Doesn't exist")
+
+    fileRepository= FileRepository.objects.all()
+    return render(request, "app/showUploads.html", {
+        "fileRepository": fileRepository,
+    })
