@@ -477,43 +477,59 @@ def showUploads(request):
     })
 
 def editJob(request, ID):
-        ID = int(ID)
-        print("ID=", ID)
-        job = Job.objects.get(pk=ID)
-        print(job)
-        brands=Brand.objects.all()
-        print("brandd==", job.brand)
+    ID = int(ID)
+    print("ID=", ID)
+    job = Job.objects.get(pk=ID)
+    print(job)
+    brands=Brand.objects.all()
+    print("brandd==", job.brand)
 
-        divs = []
-        divisions = job.division.all()
-        for each in divisions:
-            divs.append(each.id)
-        print("divs=", divs)
-        if request.method == "POST":
+    divs = []
+    patchStandards = []
+    patchTolerances = []
 
-            #brand = Brand.objects.get(pk=int(request.POST.get("brand")))
-            # product = Product.objects.get(pk=int(request.POST.get("product")))
-            # divisions = request.POST.getlist("divisions")
-            # print("divisions", divisions)
-            # name = request.POST.get("jobName")
-            # active = str_to_bool(request.POST.get("active"))
-            #
-            # job = Job(
-            #             product = product,
-            #             name=name,
-            #             active=active,
-            #         )
-            # job.save()
-            return render(request, "app/editJob.html", {
-                "message":"Job updated successfully!!!",
-                "job": job,
-                "brands":Brand.objects.all(),
-                "divisions": divs,
-            })
-        else:
-            return render(request, "app/editJob.html", {
-                "message":"",
-                "job": job,
-                "brands":Brand.objects.all(),
-                "divisions": divs,
-            })
+    divisions = job.division.all()
+    for each in divisions:
+        divs.append(each.id)
+    print("divs=", divs)
+
+    jobPatch = JobPatch.objects.filter(job=job)
+    for each in jobPatch:
+        patchStandards.append(each.patch_standard.id)
+        patchTolerances.append(each.patch_tolerance.id)
+
+    print("jobPatch=", jobPatch)
+    if request.method == "POST":
+
+        #brand = Brand.objects.get(pk=int(request.POST.get("brand")))
+        # product = Product.objects.get(pk=int(request.POST.get("product")))
+        # divisions = request.POST.getlist("divisions")
+        # print("divisions", divisions)
+        # name = request.POST.get("jobName")
+        # active = str_to_bool(request.POST.get("active"))
+        #
+        # job = Job(
+        #             product = product,
+        #             name=name,
+        #             active=active,
+        #         )
+        # job.save()
+        return render(request, "app/editJob.html", {
+            "message":"Job updated successfully!!!",
+            "job": job,
+            "brands":Brand.objects.all(),
+            "divisions": divs,
+            "jobPatch": jobPatch,
+            "patchSta": patchStandards,
+            "patchTol": patchTolerances,
+        })
+    else:
+        return render(request, "app/editJob.html", {
+            "message":"",
+            "job": job,
+            "brands":Brand.objects.all(),
+            "divisions": divs,
+            "jobPatch": jobPatch,
+            "patchSta": patchStandards,
+            "patchTol": patchTolerances,
+        })
