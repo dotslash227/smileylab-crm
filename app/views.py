@@ -582,18 +582,6 @@ def deleteBrand(request, ID):
         "brands": brands,
     })
 
-def deleteDivision(request, ID):
-    ID = int(ID)
-    try:
-        division = Division.objects.get(pk=ID).delete()
-    except:
-        print("Doesn't exist")
-
-    divisions= Division.objects.all()
-    return render(request, "app/showDivisions.html", {
-        "divisions": divisions,
-    })
-
 def editDivision(request, ID):
     ID = int(ID)
     division = Division.objects.get(pk=ID)
@@ -615,14 +603,11 @@ def editDivision(request, ID):
         division.member = newMember
         division.zipCode = newZipCode
         division.save()
-        print(division.address)
-        division = Division.objects.get(pk=ID)
-        print(division.address)
+
 
         return render(request, "app/editDivision.html", {
             "message":"Division updated successfully!!!",
             "division": division,
-            "addresss": division.address,
             "members":Member.objects.all(),
             "countries":list(countries),
         })
@@ -630,7 +615,56 @@ def editDivision(request, ID):
         return render(request, "app/editDivision.html", {
             "message":"",
             "division": division,
-            "addresss": division.address,
             "members":Member.objects.all(),
             "countries":list(countries),
         })
+
+def deleteDivision(request, ID):
+    ID = int(ID)
+    try:
+        division = Division.objects.get(pk=ID).delete()
+    except:
+        print("Doesn't exist")
+
+    divisions= Division.objects.all()
+    return render(request, "app/showDivisions.html", {
+        "divisions": divisions,
+    })
+
+def editStandard(request, ID):
+    ID = int(ID)
+    standard = Standard.objects.get(pk=ID)
+
+    if request.method == "POST":
+        newName = request.POST.get("standardName")
+        newIcc = request.POST.get("icc")
+        newVersion = request.POST.get("version")
+        newActive = str_to_bool(request.POST.get("active"))
+
+        standard.active = newActive
+        standard.name = newName
+        standard.icc = newIcc
+        standard.version = newVersion
+        standard.save()
+
+        return render(request, "app/editStandard.html", {
+            "message":"Division updated successfully!!!",
+            "standard": standard,
+        })
+    else:
+        return render(request, "app/editStandard.html", {
+            "message":"",
+            "standard": standard,
+        })
+
+def deleteStandard(request, ID):
+    ID = int(ID)
+    try:
+        standard = Standard.objects.get(pk=ID).delete()
+    except:
+        print("Doesn't exist")
+
+    standard = Standard.objects.all()
+    return render(request, "app/showStandards.html", {
+        "standards": standard,
+    })

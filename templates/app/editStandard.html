@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %} Edit Standard {% endblock title %} {% block content %}
+<div class="row" style="margin-top:-20px">
+  <div class="large-12 columns">
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="box palette-Grey-300 bg">
+          <div class="box-header  palette-Grey-300 bg">
+            <h3 class="box-title"><span class="text-white">&nbsp;&nbsp;&nbsp;EDIT STANDARD</span></h3>
+            <div class="pull-right text-white box-tools">
+              <span class="text-white box-btn"><i class="circle-nest-medium ti-notepad"></i>
+              </span> &nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="medium-9 columns ">
+              <div>
+                <form action="#" method="POST" class="form-inline">{% csrf_token %}
+                  <br>
+                  <br>
+                  <h4 style="color: red">{{message}}</h4>
+
+                  <div class="form-group">
+                    <label >Standard Name:</label>
+                    <input type="text" class="form-control" name="standardName" value="{{standard.name}}" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label >Version:</label>
+                    <input type="text" class="form-control" name="version" value="{{standard.version}}" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label >ICC:</label>
+                    <input type="text" class="form-control" name="icc" value="{{standard.icc}}" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Active:</label>
+                    <select name="active" class="form-control" required>
+                      {% if standard.active == 1 %}
+                        <option selected value="True">Active</option>
+                        <option value="False">Inactive</option>
+                      {% else %}
+                      <option value="True">Active</option>
+                      <option selected value="False">Inactive</option>
+                      {% endif %}
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-default">Update Standard</button>
+
+                  <br>
+                  <br>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
