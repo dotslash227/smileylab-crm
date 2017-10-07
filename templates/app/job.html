@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load staticfiles %} {% block title %} Home {% endblock title %} {% block content %}
+{% extends "base.html" %} {% load staticfiles %} {% block title %} New Job {% endblock title %} {% block content %}
 <div class="row" style="margin-top:-20px">
   <div class="large-12 columns">
     <div class="row">
@@ -30,10 +30,15 @@
                           function(values){
                               console.log("values=", values);
                                $('#divisionOptions option').remove();
-
                                for(var count=0; count < values["divisions"].length; count++){
                                  //  console.log("values",divisions["divisions"][count]["id"] );
                                 $('#divisionOptions').append( new Option(values["divisions"][count]["name"],values["divisions"][count]["id"]) );
+                               }
+
+                               $('#productOptions option').remove();
+                               for(var count=0; count < values["products"].length; count++){
+                                 //  console.log("values",divisions["divisions"][count]["id"] );
+                                $('#productOptions').append( new Option(values["products"][count]["name"],values["products"][count]["id"]) );
                                }
 
                               $('select[name^=brandColor] option').remove();
@@ -76,17 +81,22 @@
                     </select>
                   </div>
 
-
+                  <div class="form-group">
+                    <label>Product Name:</label>
+                    <select id="productOptions" name="product"  class="form-control" required>
+                      <option disabled selected value> -- select an option -- </option>
+                    </select>
+                  </div>
 
                   <div class="form-group">
-                    <label  name="brand">Division Name:</label>
+                    <label>Division Name:</label>
                     <select id="divisionOptions" name="divisions" multiple class="form-control" required>
                     </select>
                   </div>
 
                   <div class="form-group">
                     <label >Job Name:</label>
-                    <input type="text" class="form-control" name="jobsName" required>
+                    <input type="text" class="form-control" name="jobName" required>
                   </div>
 
                   <div class="form-group">
@@ -106,8 +116,8 @@
 
                       <script>
                         function fieldAdd() {
-
                           colorCount+=1;
+                          document.getElementById('countOfColor').value = colorCount;
                           $('#addTable').append(
                             `<tr>
                               <td><label  name='colorListLable`+colorCount+`'>Color List `+colorCount+`</label></td>
@@ -133,8 +143,8 @@
                       </script>
                       <script>
                       function fieldRemove() {
-
                         if(colorCount!=1){
+                          document.getElementById('countOfColor').value = colorCount;
                           colorCount-=1;
                           $('#addTable tr').last().remove()
                         }
@@ -147,13 +157,26 @@
                       <tbody id="addTable">
                         <tr>
                           <td><label  name="colorListLable1">Color List 1</label></td>
-                          <td><select required id="brandColorOptions1" name="brandColor1" class="form-control"></select></td>
-                          <td><select required id="patchToleranceOptions1" name="patchTolerance1" class="form-control"></select></td>
+                          <td><select required id="brandColorOptions1" name="brandColor1" class="form-control">
+                                <option disabled selected value> -- select an option -- </option>
+                              </select>
+                          </td>
+                          <td><select required id="patchToleranceOptions1" name="patchTolerance1" class="form-control">
+                                <option disabled selected value> -- select an option -- </option>
+                              </select>
+                          </td>
                           <td></td>
                         </tr>
 
                       </tbody>
                     </table>
+
+                    <input type="hidden" id="countOfColor" name="countOfColor" value="">
+                    <script type="text/javascript">
+                      document.getElementById('countOfColor').value = colorCount;
+                    </script>
+
+
 
                     <label>Active:</label>
                     <select name="active" class="form-control" required>

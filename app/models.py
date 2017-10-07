@@ -31,6 +31,7 @@ class FileRepository(models.Model):
     active = models.BooleanField(default=True)
     fileCategory = models.ForeignKey(FileCategory)
     file_name = models.CharField(max_length=150, blank=True, null=True)
+    fileUploaded = models.FileField(max_length=150, upload_to="fileRepository/", null=True)
     def __str__(self):
         return self.file_name
 
@@ -248,32 +249,36 @@ class PatchStandard(models.Model):
         return self.name
 
 class Job(models.Model):
+    active= models.BooleanField(default=True)
     date_added = models.DateTimeField(default=timezone.now)
+    brand = models.ForeignKey(Brand, null=True)
     name = models.CharField(max_length=150, blank=True, null=True)
-    standard = models.ForeignKey(Standard)
+    standard = models.ForeignKey(Standard, null=True)
     product = models.ForeignKey(Product)
-    avg_de2000 = models.FloatField(null=True)
-    color_match = models.CharField(max_length=150, null=True)
-    die_lines =  models.CharField(max_length=150, null=True)
-    division = models.ManyToManyField(Division)
-    dna_drawdown_submissions =  models.CharField(max_length=150, null=True)
-    event = models.CharField(max_length=150, null=True)
-    fansworth_test = models.CharField(max_length=150, null=True)
-    instrument_status = models.CharField(max_length=150, null=True)
-    job_number = models.CharField(max_length = 150, null=True)
-    lot_id = models.CharField(max_length = 150, null=True)
-    max_de2000 = models.FloatField(null=True)
-    pre_engg_meetings = models.CharField(max_length = 150, null=True)
-    press_conditions = models.CharField(max_length = 150, null=True)
-    press_schedule = models.CharField(max_length = 150, null=True)
-    printing_defects = models.CharField(max_length = 150, null=True)
-    registration = models.CharField(max_length = 150, null=True)
-    responsiveness = models.CharField(max_length = 150, null=True)
-    run = models.CharField(max_length = 150, null=True)
-    sku_number = models.CharField(max_length = 150, null=True)
-    spc = models.CharField(max_length = 150, null=True)
-    version = models.CharField(max_length = 150, null=True)
-    viewing_conditions = models.CharField(max_length = 150, null=True)
+    avg_de2000 = models.FloatField(null=True, blank=True)
+    color_match = models.CharField(max_length=150, null=True, blank=True)
+    die_lines =  models.CharField(max_length=150, null=True, blank=True)
+    division = models.ManyToManyField(Division, null=True, blank=True)
+    dna_drawdown_submissions =  models.CharField(max_length=150, null=True, blank=True)
+    event = models.CharField(max_length=150, null=True, blank=True)
+    fansworth_test = models.CharField(max_length=150, null=True, blank=True)
+    instrument_status = models.CharField(max_length=150, null=True, blank=True)
+    job_number = models.CharField(max_length = 150, null=True, blank=True)
+    lot_id = models.CharField(max_length = 150, null=True, blank=True)
+    max_de2000 = models.FloatField(null=True, blank=True)
+    pre_engg_meetings = models.CharField(max_length = 150, null=True, blank=True)
+    press_conditions = models.CharField(max_length = 150, null=True, blank=True)
+    press_schedule = models.CharField(max_length = 150, null=True, blank=True)
+    printing_defects = models.CharField(max_length = 150, null=True, blank=True)
+    registration = models.CharField(max_length = 150, null=True, blank=True)
+    responsiveness = models.CharField(max_length = 150, null=True, blank=True)
+    run = models.CharField(max_length = 150, null=True, blank=True)
+    sku_number = models.CharField(max_length = 150, null=True, blank=True)
+    spc = models.CharField(max_length = 150, null=True, blank=True)
+    version = models.CharField(max_length = 150, null=True, blank=True)
+    viewing_conditions = models.CharField(max_length = 150, null=True, blank=True)
+    def __str__(self):
+        return self.name
 
 class Device(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
@@ -304,8 +309,8 @@ class UserPreference(models.Model):
 class JobPatch(models.Model):
     date_added = models.DateTimeField(default=timezone.now)
     job = models.ForeignKey(Job)
-    patch_standard_id=models.IntegerField(null=True)
-    patch_tolerance_id=models.IntegerField(null=True)
+    patch_standard=models.ForeignKey(PatchStandard, null=True)
+    patch_tolerance=models.ForeignKey(PatchTolerance, null=True)
 
 class Sheet(models.Model):
     date_added = models.DateTimeField(default=timezone.now)

@@ -1,0 +1,79 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %} Show Jobs {% endblock title %} {% block content %}
+<div class="row" style="margin-top:-20px">
+  <div class="large-12 columns">
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="box palette-Grey-300 bg">
+          <div class="box-header  palette-Grey-300 bg">
+            <h3 class="box-title"><span class="text-white">&nbsp;&nbsp;&nbsp;Show Jobs</span></h3>
+            <div class="pull-right text-white box-tools">
+              <span class="text-white box-btn"><i class="circle-nest-medium ti-notepad"></i>
+              </span> &nbsp;&nbsp;&nbsp;
+            </div>
+
+            <div class="medium-9 columns ">
+              <div>
+                <br><br>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Division</th>
+                      <th>Name</th>
+                      <th>Menu</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for each in jobs %}
+                      <tr>
+                        <td>{{each.product.name}}</td>
+                        <td>
+                          <ul>
+                            {% for div in each.division.all  %}
+                              <li>{{div.name}}</li>
+                            {% endfor %}
+
+                          </ul>
+                        </td>
+                        <td>{{each.name}}</td>
+                        <td>
+                          <select name="{{forloop.counter}}" class="form-control" onchange="selected(this);" required>
+                            <option disabled selected value> -- select an option -- </option>
+                            <option value="{{each.pk}}">Brand Color</option>
+                            <option value="{{each.pk}}">Numerical Trend</option>
+                            <option value="{{each.pk}}">Visual Trend</option>
+                            <option value="{{each.pk}}">Copy</option>
+                            <option value="{{each.pk}}">Edit Jobs</option>
+                            <option value="{{each.pk}}">Delete Job</option>
+                          </select>
+                        </td>
+
+                      </tr>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+                <script type="text/javascript">
+                    function selected(item){
+                      //alert(item.options[item.selectedIndex].text);
+                      value = item.options[item.selectedIndex].value;
+                      text = item.options[item.selectedIndex].text;
+                      console.log("text=>", text);
+                      if(text.localeCompare("Edit Jobs")==0){
+                        location.href = "/editJob/"+value;
+                      }
+                      else if(text.localeCompare("Delete Job")==0){
+                        location.href = "/deleteJob/"+value;
+                      }
+                    }
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

@@ -7,7 +7,6 @@ from .models import *
 from django_countries import countries
 from django.http import JsonResponse
 
-
 def str_to_bool(s):
     if s == 'False':
         return False
@@ -42,6 +41,7 @@ def valuesFromBrand(request):
     div_list=[]
     ps_list=[]
     pt_list=[]
+    prod_list=[]
 
     if request.method == "GET":
         brand = Brand.objects.get(pk=int(request.GET.get("brand")))
@@ -69,6 +69,15 @@ def valuesFromBrand(request):
             pt_list.append(data)
         resp_dict["patchTolerances"]=pt_list
 
+        product = Product.objects.filter(brand=brand)
+        for each in product:
+            data = {}
+            data["id"]=each.id
+            data["name"]=each.name
+            prod_list.append(data)
+        resp_dict["products"]=prod_list
+
+
         return JsonResponse(resp_dict,safe=False)
     else:
         return JsonResponse({"error":"error"})
@@ -76,24 +85,39 @@ def valuesFromBrand(request):
 def job(request):
     if request.method == "POST":
         brand = Brand.objects.get(pk=int(request.POST.get("brand")))
-        division
-        job
+        product = Product.objects.get(pk=int(request.POST.get("product")))
+        divisions = request.POST.getlist("divisions")
+        print("divisions", divisions)
+        name = request.POST.get("jobName")
         active = str_to_bool(request.POST.get("active"))
 
-        # name = request.POST.get("name")
-        # address = request.POST.get("address")
-        # city = request.POST.get("city")
-        # state = request.POST.get("state")
-        # country = request.POST.get("country")
-        # zipCode = int(request.POST.get("zip"))
-        # member = Member.objects.get(pk=int(request.POST.get("member")))
-        # job = Job(
-        #             brand = brand,
-        #             division = division,
-        #             job = brand,
-        #
-        #         )
-        # division.save()
+        job = Job(
+                    brand = brand,
+                    product = product,
+                    name=name,
+                    active=active,
+                )
+        job.save()
+        #my_obj.categories.add(fragmentCategory.objects.get(id=1))
+        job = Job.objects.filter(name=name)[0]
+        for each in divisions:
+            division = Division.objects.get(pk=int(each))
+            job.division.add(division)
+
+        countOfColor = int(request.POST.get("countOfColor"))
+        print("countOfColor", countOfColor)
+        for i in xrange(1, countOfColor+1):
+            jobPatch = JobPatch(
+                job=job,
+                patch_standard=PatchStandard.objects.get(pk=int(request.POST.get("brandColor"+str(i)))),
+                patch_tolerance=PatchTolerance.objects.get(pk=int(request.POST.get("patchTolerance"+str(i)))),
+            )
+            jobPatch.save()
+
+        # colorLists-> brandcolor(patchStandards, patchTolerances)
+
+
+
         return render(request, "app/job.html", {
             "message":"New Job saved successfully!!!",
             "brands":Brand.objects.all(),
@@ -376,3 +400,312 @@ def bookmark(request):
 
 def link(request):
     return render(request, "app/link.html", {})
+
+def showJobs(request):
+    jobs= Job.objects.all()
+    print(len(jobs))
+    for each in jobs:
+        print(each.division.all())
+    return render(request, "app/showJobs.html", {
+        "jobs": jobs,
+        "jobsLen": xrange(1, len(jobs)+1),
+    })
+
+def showBrands(request):
+    brands= Brand.objects.all()
+    return render(request, "app/showBrands.html", {
+        "brands": brands,
+    })
+
+def showDivisions(request):
+    divisions= Division.objects.all()
+    return render(request, "app/showDivisions.html", {
+        "divisions": divisions,
+    })
+
+def showStandards(request):
+    standards= Standard.objects.all()
+    return render(request, "app/showStandards.html", {
+        "standards": standards,
+    })
+
+def showEvalutions(request):
+    #evalutions= Evaluation.objects.all()
+    return render(request, "app/showEvaluations.html", {
+        #"evaluations": evaluations,
+    })
+
+def showMemberEvaluations(request):
+    #memberEvaluations= MemberEvaluation.objects.all()
+    return render(request, "app/showMemberEvaluations.html", {
+        #"memberEvaluations": memberEvaluations,
+    })
+
+def showMemberProperty(request):
+    #membetProperty= MemberProperty.objects.all()
+    return render(request, "app/showMemberProperty.html", {
+        #"memberProperty": memberProperty,
+    })
+
+def upload(request):
+    if request.method == "POST":
+        fileCategory = FileCategory.objects.get(pk= int(request.POST.get("category")))
+        file_name = request.POST.get("name")
+        fileUploaded = request.FILES["file"]
+        active = str_to_bool(request.POST.get("active"))
+
+        fileRepository = FileRepository(
+                        active = active,
+                        fileCategory = fileCategory,
+                        file_name = file_name,
+                        fileUploaded = fileUploaded,
+                        )
+        fileRepository.save()
+        return render(request, "app/upload.html", {
+            "message":"File Uploaded!!!",
+            "category": FileCategory.objects.all(),
+        })
+    else:
+        return render(request, "app/upload.html", {
+            "message":"",
+            "category": FileCategory.objects.all(),
+        })
+
+def showUploads(request):
+    fileRepository= FileRepository.objects.all()
+    return render(request, "app/showUploads.html", {
+        "fileRepository": fileRepository,
+    })
+
+def editJob(request, ID):
+    ID = int(ID)
+    job = Job.objects.get(pk=ID)
+    brands=Brand.objects.all()
+
+    divs = []
+    patchStandards = []
+    patchTolerances = []
+
+    divisions = job.division.all()
+    for each in divisions:
+        divs.append(each.id)
+
+    jobPatch = JobPatch.objects.filter(job=job)
+    for each in jobPatch:
+        patchStandards.append(each.patch_standard.id)
+        patchTolerances.append(each.patch_tolerance.id)
+
+
+    if request.method == "POST":
+        newBrand = Brand.objects.get(pk=int(request.POST.get("brand")))
+        newProduct = Product.objects.get(pk=int(request.POST.get("product")))
+        newDivisions = request.POST.getlist("divisions")
+        newName = request.POST.get("jobName")
+        newActive = str_to_bool(request.POST.get("active"))
+
+        job.brand = newBrand
+        job.product = newProduct
+        job.name = newName
+        job.active= newActive
+        job.save()
+
+        job.division.clear()
+        for each in newDivisions:
+            newDivision = Division.objects.get(pk=int(each))
+            job.division.add(newDivision)
+
+        JobPatch.objects.filter(job=job).delete()
+        newCountOfColor = int(request.POST.get("countOfColor"))
+        for i in xrange(1, newCountOfColor+1):
+            newJobPatch = JobPatch(
+                job=job,
+                patch_standard=PatchStandard.objects.get(pk=int(request.POST.get("brandColor"+str(i)))),
+                patch_tolerance=PatchTolerance.objects.get(pk=int(request.POST.get("patchTolerance"+str(i)))),
+            )
+            newJobPatch.save()
+
+        divs = []
+        patchStandards = []
+        patchTolerances = []
+
+        divisions = job.division.all()
+        for each in divisions:
+            divs.append(each.id)
+
+        jobPatch = JobPatch.objects.filter(job=job)
+        for each in jobPatch:
+            patchStandards.append(each.patch_standard.id)
+            patchTolerances.append(each.patch_tolerance.id)
+
+        return render(request, "app/editJob.html", {
+            "message":"Job updated successfully!!!",
+            "job": job,
+            "brands":Brand.objects.all(),
+            "divisions": divs,
+            "jobPatch": jobPatch,
+            "patchSta": patchStandards,
+            "patchTol": patchTolerances,
+        })
+    else:
+        return render(request, "app/editJob.html", {
+            "message":"",
+            "job": job,
+            "brands":Brand.objects.all(),
+            "divisions": divs,
+            "jobPatch": jobPatch,
+            "patchSta": patchStandards,
+            "patchTol": patchTolerances,
+        })
+
+def deleteJob(request, ID):
+    ID = int(ID)
+    try:
+        job = Job.objects.get(pk=ID).delete()
+    except:
+        print("Doesnt exist")
+
+    jobs= Job.objects.all()
+    return render(request, "app/showJobs.html", {
+        "jobs": jobs,
+        "jobsLen": xrange(1, len(jobs)+1),
+    })
+
+def deleteBrand(request, ID):
+    ID = int(ID)
+    try:
+        brand = Brand.objects.get(pk=ID).delete()
+    except:
+        print("Doesn't exist")
+
+    brands= Brand.objects.all()
+    return render(request, "app/showBrands.html", {
+        "brands": brands,
+    })
+
+def editDivision(request, ID):
+    ID = int(ID)
+    division = Division.objects.get(pk=ID)
+
+    if request.method == "POST":
+        newName = request.POST.get("name")
+        newAddress = request.POST.get("address")
+        newCity = request.POST.get("city")
+        newState = request.POST.get("state")
+        newCountry = request.POST.get("country")
+        newZipCode = int(request.POST.get("zip"))
+        newMember = Member.objects.get(pk=int(request.POST.get("member")))
+
+        division.name = newName
+        division.address = newAddress
+        division.city = newCity
+        division.state =  newState
+        division.country = newCountry
+        division.member = newMember
+        division.zipCode = newZipCode
+        division.save()
+
+
+        return render(request, "app/editDivision.html", {
+            "message":"Division updated successfully!!!",
+            "division": division,
+            "members":Member.objects.all(),
+            "countries":list(countries),
+        })
+    else:
+        return render(request, "app/editDivision.html", {
+            "message":"",
+            "division": division,
+            "members":Member.objects.all(),
+            "countries":list(countries),
+        })
+
+def deleteDivision(request, ID):
+    ID = int(ID)
+    try:
+        division = Division.objects.get(pk=ID).delete()
+    except:
+        print("Doesn't exist")
+
+    divisions= Division.objects.all()
+    return render(request, "app/showDivisions.html", {
+        "divisions": divisions,
+    })
+
+def editStandard(request, ID):
+    ID = int(ID)
+    standard = Standard.objects.get(pk=ID)
+
+    if request.method == "POST":
+        newName = request.POST.get("standardName")
+        newIcc = request.POST.get("icc")
+        newVersion = request.POST.get("version")
+        newActive = str_to_bool(request.POST.get("active"))
+
+        standard.active = newActive
+        standard.name = newName
+        standard.icc = newIcc
+        standard.version = newVersion
+        standard.save()
+
+        return render(request, "app/editStandard.html", {
+            "message":"Division updated successfully!!!",
+            "standard": standard,
+        })
+    else:
+        return render(request, "app/editStandard.html", {
+            "message":"",
+            "standard": standard,
+        })
+
+def deleteStandard(request, ID):
+    ID = int(ID)
+    try:
+        standard = Standard.objects.get(pk=ID).delete()
+    except:
+        print("Doesn't exist")
+
+    standard = Standard.objects.all()
+    return render(request, "app/showStandards.html", {
+        "standards": standard,
+    })
+
+
+def editUpload(request, ID):
+    ID = int(ID)
+    fileRepository = FileRepository.objects.get(pk=ID)
+
+    if request.method == "POST":
+        newFileCategory = FileCategory.objects.get(pk= int(request.POST.get("category")))
+        newFile_name = request.POST.get("name")
+        newFileUploaded = request.FILES["file"]
+        newActive = str_to_bool(request.POST.get("active"))
+
+        fileRepository.active = newActive
+        fileRepository.fileCategory = newFileCategory
+        fileRepository.file_name = newFile_name
+        fileRepository.fileUploaded = newFileUploaded
+        fileRepository.save()
+
+        return render(request, "app/editUpload.html", {
+            "message":"Upload updated successfully!!!",
+            "fileRepository": fileRepository,
+            "category": FileCategory.objects.all(),
+        })
+    else:
+        return render(request, "app/editUpload.html", {
+            "message":"",
+            "fileRepository": fileRepository,
+            "category": FileCategory.objects.all(),
+        })
+
+def deleteUpload(request, ID):
+    ID = int(ID)
+    try:
+        fileRepository = FileRepository.objects.get(pk=ID).delete()
+    except:
+        print("Doesn't exist")
+
+    fileRepository= FileRepository.objects.all()
+    return render(request, "app/showUploads.html", {
+        "fileRepository": fileRepository,
+    })

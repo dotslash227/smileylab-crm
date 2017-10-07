@@ -1,0 +1,74 @@
+{% extends "base.html" %} {% load staticfiles %} {% block title %} Edit Upload {% endblock title %} {% block content %}
+<div class="row" style="margin-top:-20px">
+  <div class="large-12 columns">
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="box palette-Grey-300 bg">
+          <div class="box-header  palette-Grey-300 bg">
+            <h3 class="box-title"><span class="text-white">&nbsp;&nbsp;&nbsp;Edit Upload </span></h3>
+            <div class="pull-right text-white box-tools">
+              <span class="text-white box-btn"><i class="circle-nest-medium ti-notepad"></i>
+              </span> &nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="medium-9 columns ">
+              <div>
+                <form action="#" method="POST" class="form-inline" enctype="multipart/form-data">{% csrf_token %}
+                  <br>
+                  <br>
+                  <h4 style="color: red">{{message}}</h4>
+
+                  <div class="form-group">
+                    <label>Category Name:</label>
+                    <select name="category" class="form-control" required="">
+                      <option disabled selected value> -- select an option -- </option>
+                      {%for each in category %}
+                        {% if each == fileRepository.fileCategory %}
+                          <option value={{each.pk}} selected>{{each.name}}</option>
+                        {% else %}
+                          <option value={{each.pk}}>{{each.name}}</option>
+                        {% endif %}
+
+                      {% endfor %}
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label >File Name:</label>
+
+                    <input type="text" class="form-control" name="name" value="{{fileRepository.file_name}}" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label>File Upload:</label>
+                    <a style="color:blue;" target="_blank" href="{{fileRepository.fileUploaded.url}}"><ul><li>Previous File</li></ul></a>
+                    <input type="file" class="form-control" name="file"></input>
+                  </div>
+
+                  <div class="form-group">
+                    <label>Active:</label>
+                    <select name="active" class="form-control" required>
+                      {% if fileRepository.active == 1 %}
+                        <option selected value="True">Active</option>
+                        <option value="False">Inactive</option>
+                      {% else %}
+                      <option value="True">Active</option>
+                      <option selected value="False">Inactive</option>
+                      {% endif %}
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-default">Upload File</button>
+
+                  <br>
+                  <br>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
